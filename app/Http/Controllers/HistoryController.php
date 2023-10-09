@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BarangController extends Controller
+class HistoryController extends Controller
 {
     //
 }
