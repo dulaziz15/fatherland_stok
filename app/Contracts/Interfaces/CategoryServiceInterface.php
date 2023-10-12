@@ -6,5 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 interface CategoryServiceInterface {
-    public function create(Request $category): void;
+    public function create(Request $category);
+    public function findPaginate();
 }

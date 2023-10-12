@@ -12,10 +12,16 @@ class CategoryServices implements CategoryServiceInterface {
     {
     }
 
-   public function create(Request $request): void
+   public function create(Request $request)
    {
         $user = Category::create([
             'category' => $request->category,
         ]);
+   }
+
+   public function findPaginate()
+   {
+        $category = Category::paginate(2);
+        return $category;
    }
 }

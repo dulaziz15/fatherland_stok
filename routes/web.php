@@ -16,7 +16,7 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('pages.dashboard');
-});
+})->name('dashboard');
 
-Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
 Route::post('/category', [CategoryController::class, 'create'])->name('create_category');

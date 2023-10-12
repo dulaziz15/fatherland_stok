@@ -12,11 +12,12 @@ class CategoryController extends Controller
     ) {}
 
     public function index(){
-        return view('category.index');
+        $category = $this->categoryService->findPaginate();
+        return view('category.index', compact('category'));
     }
 
     public function create(Request $request) {
         $this->categoryService->create($request);
-        return view('category.index');
+        return redirect()->route('category')->with('success', 'Category created successfully');
     }
 }
