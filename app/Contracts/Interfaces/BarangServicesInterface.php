@@ -2,6 +2,6 @@
 
 namespace App\Contracts\Interfaces;
 
-interface BarangServiceInterface {
-    public function create();
+interface BarangServicesInterface {
+    public function getBarang();
 }
