@@ -45,6 +45,7 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+            @if (Auth::user()->role === 'admin')
             <li class="nav-item">
                 <a class="nav-link  {{ request()->is('category') ? 'active' : '' }}" href="{{ route('category') }}">
                     <div
@@ -71,6 +72,8 @@
                     <span class="nav-link-text ms-1">Category</span>
                 </a>
             </li>
+            @endif
+            @if (Auth::user()->role === 'user')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('barang*') ? 'active' : '' }}"
                     href="{{ route('barang.index') }}">
@@ -101,6 +104,7 @@
                     <span class="nav-link-text ms-1">Barang</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </aside>
