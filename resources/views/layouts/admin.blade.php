@@ -6,9 +6,11 @@
   @include('components.admin.sidebar')
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     @include('components.admin.navbar')
+    <div class="container-fluid py-3">
     @yield('content')
+    </div>
+    @include('components.admin.footer')
   </main>
   @include('components.admin.script')
 </body>
-
 </html>

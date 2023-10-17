@@ -20,4 +20,19 @@ class CategoryController extends Controller
         $this->categoryService->create($request);
         return redirect()->route('category')->with('success', 'Category created successfully');
     }
+
+    public function edit($id){
+        $oneCategory = $this->categoryService->findById($id);
+        return json_decode($oneCategory);
+    }
+
+    public function update($id, Request $request){
+        $this->categoryService->update($id, $request);
+        return redirect()->route('category')->with('success', 'Category updated successfully');
+    }
+
+    public function delete($id){
+        $this->categoryService->delete($id);
+        return redirect()->route('category')->with('success', 'Category delete successfully');
+    }
 }
