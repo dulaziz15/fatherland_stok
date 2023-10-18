@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('handle_login');
 
-// Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function(){
     Route::get('/', function () {
         return view('pages.dashboard');
     })->name('dashboard');
@@ -32,5 +34,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('handle_login');
     Route::resource('barang', BarangController::class)->names('barang');
     Route::resource('user', UserController::class)->names('user');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-// });
+    Route::resource('account', AccountController::class)->names('account');
+    Route::resource('penjualan', PenjualanController::class)->names('penjualan');
+});
 

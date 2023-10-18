@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\Interfaces\UserServicesInterface;
 use App\Models\User;
+use App\enums\enumsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,7 +24,7 @@ class UserServices implements UserServicesInterface {
     }
 
     public function getAll(){
-        $user = User::with('stand')->get();
+        $user = User::with('stand')->where('role', enumsUser::user)->get();
         return $user;
     }
 
