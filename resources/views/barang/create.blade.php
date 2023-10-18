@@ -1,10 +1,6 @@
 @extends('layouts.admin')
+@section('card_judul', 'Create Barang')
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <h4>Create Barang</h4>
-    </div>
-</div>
 <div class="card mt-3">
     <div class="card-body">
         <form action="" method="post">
@@ -57,14 +53,5 @@
         </form>
     </div>
 </div>
-<script>
-    function preview() {
-                frame.src = URL.createObjectURL(event.target.files[0]);
-            }
-            function clearImage() {
-                document.getElementById('formFile').value = null;
-                frame.src = "";
-            }
 
-</script>
 @endsection

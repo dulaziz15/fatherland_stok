@@ -16,8 +16,10 @@ class CategoryProvider extends ServiceProvider
         $this->app->bind(
             CategoryServiceInterface::class,
             CategoryService::class,
-            // BarangServicesInterface::class,
-            // BarangServices::class,
+            BarangServicesInterface::class,
+            BarangServices::class,
+            StandServicesInterface::class,
+            StandServices::class,
         );
     }
 

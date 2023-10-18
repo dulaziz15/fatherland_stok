@@ -79,13 +79,35 @@
     </div>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/chartjs.min.js"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{-- preview image --}}
+<script>
+    function preview() {
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+            function clearImage() {
+                document.getElementById('formFile').value = null;
+                frame.src = "";
+            }
+
+</script>
+{{-- show password --}}
+<script>
+    function showPassword() {
+        var x = document.getElementById("inputPassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 

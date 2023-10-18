@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_category')->nullable()->index(); // relasi ke table category dengan one to 
+            $table->unsignedBigInteger('id_category')->nullable()->index(); // relasi ke table category dengan one to
             $table->foreign('id_category')->references('id')->on('categories'); // foreign key
             $table->string('name')->nullable();
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

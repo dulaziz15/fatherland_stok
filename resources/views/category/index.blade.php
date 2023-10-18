@@ -1,15 +1,6 @@
 @extends('layouts.admin')
+@section('card_judul', 'category')
 @section('content')
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <div class="card mb-3">
-            <div class="card-body">
-                <h4>Category</h4>
-            </div>
-        </div>
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-end align-items-center">
