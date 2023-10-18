@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('no_telp')->nullable();
             $table->unsignedBigInteger('id_user')->nullable()->index(); // relasi ke table user
             $table->foreign('id_user')->references('id')->on('users');
+            $table->string('image')->nullable();
+            $table->string('path_image')->nullable();
             $table->timestamps();
         });
     }

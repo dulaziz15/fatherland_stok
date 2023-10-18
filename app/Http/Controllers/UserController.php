@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stand;
 use App\Models\User;
+use App\Services\StandServices;
+use App\Services\UserServices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
+    public function __construct(
+        private readonly UserServices $userServices,
+        private readonly StandServices $standServices,
+    ) {}
+    /**@for (condition)
+     *
+
+    @endfor
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('user.index');
+        $user = $this->userServices->getAll();
+        return view('user.index', compact('user'));
     }
 
     /**
@@ -25,7 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -36,11 +46,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create([
+        $user = new User([
             'username' => $request->username,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
+            'role' => $request->role,
         ]);
-        return redirect()->route('user.index');
+        $data_user = $this->userServices->store($user);
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+           ]);
+
+           $file = $request->file('image');
+           $name_image = $file->getClientOriginalName();
+           $tujuan_upload = 'images/stand';
+           $file->move($tujuan_upload,$file->getClientOriginalName());
+        $stand = new Stand([
+            'pegawai' => $request->pegawai,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'image' => $name_image,
+            'path_image' => $tujuan_upload,
+            'id_user' => $data_user->id,
+        ]);
+
+        $this->standServices->store($stand);
+
+        return redirect()->route('user.index')->with('success', 'User and Stand created successfully');
     }
 
     /**
@@ -62,7 +93,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userServices->getById($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -74,7 +106,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data_user = $this->userServices->update($id, $request);
+        $data_user_stand = $this->userServices->getById($id);
+        $data_stand = $this->standServices->getById($data_user_stand->stand->id);
+        $stand = $this->standServices->update($data_stand->id, $request);
+        return redirect()->route('user.index')->with('success', 'User and Stand updated successfully');
     }
 
     /**
@@ -85,6 +121,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data_user_stand = $this->userServices->getById($id);
+        $this->standServices->delete($data_user_stand->stand->id);
+        $this->userServices->delete($id);
+        return redirect()->route('user.index')->with('success', 'User and Stand deleted successfully');
     }
 }

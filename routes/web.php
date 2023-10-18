@@ -20,19 +20,17 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('handle_login');
 
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
     Route::get('/', function () {
         return view('pages.dashboard');
     })->name('dashboard');
-    if (Auth::check() && Auth::user()->role === 'user') {
         Route::get('/category', [CategoryController::class, 'index'])->name('category');
         Route::post('/category', [CategoryController::class, 'create'])->name('create_category');
         Route::get('/category/{id}', [CategoryController::class, 'edit'])->name('edit_category');
         Route::put('/category/{id}', [CategoryController::class, 'update'])->name('update_category');
         Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('delete_category');
-    }
     Route::resource('barang', BarangController::class)->names('barang');
     Route::resource('user', UserController::class)->names('user');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-});
+// });
 
