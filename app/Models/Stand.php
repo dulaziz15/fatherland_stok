@@ -15,4 +15,9 @@ class Stand extends Model
     {
         return $this->belongsTo(User::class)->onDelete('cascade');
     }
+
+    public function penjualan()
+    {
+        return $this->hasMany(reportPenjualan::class);
+    }
 }
