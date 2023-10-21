@@ -84,7 +84,7 @@
                                                     class="dropdown-item border-radius-md">Edit</button></li>
                                             <li>
                                             <li>
-                                                <form action="" method="POST">
+                                                <form action="{{ route('stok.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button onclick="return confirm()"

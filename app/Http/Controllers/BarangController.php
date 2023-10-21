@@ -101,6 +101,7 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->barangService->delete($id);
+        return redirect()->route('barang.index')->with('success', 'Barang deleted successfully');
     }
 }

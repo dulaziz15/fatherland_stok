@@ -3,13 +3,15 @@
 namespace App\Services;
 
 use App\Contracts\Interfaces\StokBarangServicesInterface;
+use App\Models\Barang;
 use App\Models\StokBarangStand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StokBarangServices implements StokBarangServicesInterface {
     public function __construct(
-        private readonly StokBarangStand $stokBarangStand
+        private readonly StokBarangStand $stokBarangStand,
+        private readonly BarangServices $barangServices
     ) {}
 
     public function create(Request $request){
@@ -40,5 +42,11 @@ class StokBarangServices implements StokBarangServicesInterface {
             'jumlah' => $request->jumlah,
             'note' => $request->note
         ]);
+    }
+
+    public function delete($id)
+    {
+        $stok = $this->getById($id);
+        $stok->delete();
     }
 }

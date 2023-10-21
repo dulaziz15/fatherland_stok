@@ -9,4 +9,5 @@ interface StokBarangServicesInterface {
     public function getStok();
     public function getById($id);
     public function update($id, Request $request);
+    public function delete($id);
 }
