@@ -11,8 +11,8 @@ class StokStandController extends Controller
     public function __construct(
         private readonly StokBarangServices $stokBarangService,
         private readonly BarangServices $barangServices,
-    )
-    {}
+    ) {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,8 +47,15 @@ class StokStandController extends Controller
      */
     public function store(Request $request)
     {
-        $this->stokBarangService->create($request);
-        return redirect()->route('stok.index')->with('success', 'Stok Barang created successfully');
+        $barang = $this->barangServices->getById($request->barang);
+        $updateBarang = ($barang->jumlah - $request->jumlah);
+        if ($updateBarang < 0) {
+            return redirect()->route('stok.index')->with('success', 'Stok Barang dari admin tidak mencukupi');
+        } else {
+            $this->stokBarangService->create($request);
+            $this->barangServices->updateBarang($barang->id, $updateBarang);
+            return redirect()->route('stok.index')->with('success', 'Stok Barang created successfully');
+        }
     }
 
     /**
@@ -95,6 +102,7 @@ class StokStandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->stokBarangService->delete($id);
+        return redirect()->route('stok.index')->with('success', 'Stok deleted successfully');
     }
 }
