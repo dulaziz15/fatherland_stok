@@ -70,7 +70,8 @@ class StokStandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $stok = $this->stokBarangService->getById($id);
+        return json_decode($stok);
     }
 
     /**
@@ -82,7 +83,8 @@ class StokStandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->stokBarangService->update($id, $request);
+        return redirect()->route('stok.index')->with('success', 'Stok updated successfully');
     }
 
     /**
