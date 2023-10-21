@@ -25,4 +25,20 @@ class StokBarangServices implements StokBarangServicesInterface {
         $stok = StokBarangStand::with('barang', 'stand')->paginate(5);
         return $stok;
     }
+
+    public function getById($id)
+    {
+        $stok = StokBarangStand::where('id', $id)->with('barang', 'stand')->first();
+        return $stok;
+    }
+
+    public function update($id, Request $request)
+    {
+        $stok = $this->getById($id);
+        $stok->update([
+            'id_barang' => $request->barang,
+            'jumlah' => $request->jumlah,
+            'note' => $request->note
+        ]);
+    }
 }

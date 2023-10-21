@@ -36,7 +36,6 @@
             success: function(response) {
                 // Tampilkan data dalam modal
                 let responseData = response.category;
-                console.log(responseData);
                 $('#category-update').val(responseData);
                 $('#submitUpdate').attr('onclick', 'formUpdate(' + response.id + ')');
                 $('#modal-category-edit').modal('show');
