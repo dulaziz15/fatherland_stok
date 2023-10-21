@@ -4,12 +4,13 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-end align-items-center">
-                <a href="{{ route('penjualan.create') }}" class="btn bg-gradient-dark mb-0"><i class="fas fa-plus"
-                        aria-hidden="true"></i>&nbsp;&nbsp;Add Report Penjualan</a>
+                <button class="btn bg-gradient-dark mb-0" onclick="addReport()"><i class="fas fa-plus"
+                        aria-hidden="true"></i>&nbsp;&nbsp;Add Report Penjualan</button>
             </div>
         </div>
         <div class="table-responsive">
             <div class="card-body">
+                @include('penjualan.create')
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
@@ -42,7 +43,7 @@
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <div class="row justify-content-end">
+                                    <div class="row justify-content-end mx-3">
                                         <div class="col-lg-3">
                                             <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
                                                 @csrf
@@ -62,20 +63,17 @@
                                         </button>
                                         <ul class="dropdown-menu px-2 py-3 bg-body border"
                                             aria-labelledby="dropdownMenuButton">
-                                                <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm()"
-                                                        class="dropdown-item border-radius-md"
-                                                        type="submit">Delete</button>
-                                                </form>
+                                            <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button onclick="return confirm()" class="dropdown-item border-radius-md"
+                                                    type="submit">Delete</button>
+                                            </form>
                                             </li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
-                            {{-- Modal Edit --}}
-                            @include('category.modalEdit')
                         @endforeach
                     </tbody>
                 </table>

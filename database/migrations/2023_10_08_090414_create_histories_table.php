@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_stand')->nullable()->index(); // relasi ke table stand
-            $table->foreign('id_stand')->references('id')->on('stands');
-            $table->unsignedBigInteger('id_barang')->nullable()->index(); // relasi ke table barang
-            $table->foreign('id_barang')->references('id')->on('barangs');
+            $table->unsignedBigInteger('id_stand')->nullable()->index()->unsigned(); // relasi ke table stand
+            $table->foreign('id_stand')->references('id')->on('stands')->onDelete('cascade');
+            $table->unsignedBigInteger('id_barang')->nullable()->index()->unsigned(); // relasi ke table barang
+            $table->foreign('id_barang')->references('id')->on('barangs')->onDelete('cascade');
             $table->string('action')->nullable(); // action in atau out barang
             $table->unsignedBigInteger('jumlah')->nullable(); // jumlah barang in atau out
             $table->string('note')->nullable(); // catatan ketika ada suatu action

@@ -89,13 +89,22 @@
 {{-- preview image --}}
 <script>
     function preview() {
-                frame.src = URL.createObjectURL(event.target.files[0]);
-            }
-            function clearImage() {
-                document.getElementById('formFile').value = null;
-                frame.src = "";
-            }
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
 
+    function clearImage() {
+        document.getElementById('formFile').value = null;
+        frame.src = "";
+    }
+    // show form add Report
+    function addReport() {
+        const form = $('#formReport');
+        if (form.is(':visible')) {
+            form.fadeOut();
+        } else {
+            form.fadeIn();
+        }
+    }
 </script>
 {{-- show password --}}
 <script>

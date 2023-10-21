@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('pegawai')->nullable();
             $table->string('alamat')->nullable();
             $table->unsignedBigInteger('no_telp')->nullable();
-            $table->unsignedBigInteger('id_user')->nullable()->index(); // relasi ke table user
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user')->nullable()->index()->unsigned(); // relasi ke table user
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->string('path_image')->nullable();
             $table->timestamps();

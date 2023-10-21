@@ -20,4 +20,9 @@ class Stand extends Model
     {
         return $this->hasMany(reportPenjualan::class);
     }
+
+    public function StokBarang()
+    {
+        return $this->hasMany(StokBarangStand::class);
+    }
 }

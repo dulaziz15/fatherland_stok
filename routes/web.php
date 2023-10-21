@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\StokStandController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,5 +37,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('account', AccountController::class)->names('account');
     Route::resource('penjualan', PenjualanController::class)->names('penjualan');
+    Route::resource('stok', StokStandController::class)->names('stok');
 });
 

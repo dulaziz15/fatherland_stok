@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_category')->nullable()->index(); // relasi ke table category dengan one to
-            $table->foreign('id_category')->references('id')->on('categories'); // foreign key
+            $table->unsignedBigInteger('id_category')->nullable()->index()->unsigned(); // relasi ke table category dengan one to
+            $table->foreign('id_category')->references('id')->on('categories')->onDelete('cascade'); // foreign key
             $table->string('name')->nullable();
             $table->integer('jumlah');
+            $table->string('image')->nullable();
+            $table->string('path_image')->nullable();
             $table->timestamps();
         });
     }
