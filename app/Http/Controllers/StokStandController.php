@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
-use Illuminate\Http\Request;
-use App\Services\CategoryServices;
 use App\Services\BarangServices;
+use App\Services\StokBarangServices;
+use Illuminate\Http\Request;
 
-class BarangController extends Controller
+class StokStandController extends Controller
 {
     public function __construct(
-        private readonly CategoryServices $categoryService,
-        private readonly BarangServices $barangService,
-    ) {
-    }
+        private readonly StokBarangServices $stokBarangService,
+        private readonly BarangServices $barangServices,
+    )
+    {}
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +20,13 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = $this->barangService->getBarang();
-        return view('barang.index', compact('barang'));
+        $barang = $this->barangServices->getAll();
+        $stok = $this->stokBarangService->getStok();
+        $result = [
+            'barang' => $barang,
+            'stok' => $stok,
+        ];
+        return view('stok.index', $result);
     }
 
     /**
@@ -32,8 +36,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        $category = $this->categoryService->findAll();
-        return view('barang.create', compact('category'));
+        //
     }
 
     /**
@@ -44,19 +47,8 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('gambar');
-        $name_image = $file->getClientOriginalName();
-        $tujuan_upload = 'images/barang';
-        $file->move($tujuan_upload, $file->getClientOriginalName());
-        $barang = new Barang([
-            'id_category' => $request->id_category,
-            'name' => $request->barang,
-            'jumlah' => $request->jumlah,
-            'image' => $name_image,
-            'path_image' => $tujuan_upload,
-        ]);
-        $this->barangService->create($barang);
-        return redirect()->route('barang.index')->with('success', 'Barang created successfully');
+        $this->stokBarangService->create($request);
+        return redirect()->route('stok.index')->with('success', 'Stok Barang created successfully');
     }
 
     /**

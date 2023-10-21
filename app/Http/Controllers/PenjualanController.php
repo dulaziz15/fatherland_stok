@@ -41,7 +41,7 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $this->penjualanServices->store($request);
-        return redirect()->route('penjualan.index');
+        return redirect()->route('penjualan.index')->with('success', 'Report Pernjualan created successfully');
     }
 
     /**

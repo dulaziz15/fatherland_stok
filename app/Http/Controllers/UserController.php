@@ -122,7 +122,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data_user_stand = $this->userServices->getById($id);
-        $this->standServices->delete($data_user_stand->stand->id);
         $this->userServices->delete($id);
         return redirect()->route('user.index')->with('success', 'User and Stand deleted successfully');
     }
