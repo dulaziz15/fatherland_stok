@@ -106,10 +106,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data_user = $this->userServices->update($id, $request);
+        $this->userServices->update($id, $request);
         $data_user_stand = $this->userServices->getById($id);
         $data_stand = $this->standServices->getById($data_user_stand->stand->id);
-        $stand = $this->standServices->update($data_stand->id, $request);
+        $this->standServices->update($data_stand->id, $request);
         return redirect()->route('user.index')->with('success', 'User and Stand updated successfully');
     }
 

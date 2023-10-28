@@ -8,6 +8,8 @@ use App\Models\User;
 
 class Stand extends Model
 {
+    protected $table = 'stand';
+    protected $primaryKey = 'id';
     use HasFactory;
     protected $fillable = ['pegawai', 'alamat', 'no_telp', 'image', 'path_image', 'id_user'];
 
@@ -24,5 +26,9 @@ class Stand extends Model
     public function StokBarang()
     {
         return $this->hasMany(StokBarangStand::class);
+    }
+
+    public function LogActivity() {
+        return $this->hasMany(LogActivity::class);
     }
 }

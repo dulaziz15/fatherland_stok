@@ -15,7 +15,6 @@
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">category</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Create
                                 At</th>
@@ -33,9 +32,6 @@
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->category->category }}</p>
                                 </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $item->jumlah }}</p>
-                                </td>
                                 <td class="align-middle text-center">
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>
                                 </td>
@@ -52,9 +48,9 @@
                                             </form>
                                         </div>
                                         <div class="col-lg-2">
-                                            <button class="btn bg-gradient-warning d-none d-md-block" title="Edit"><span
+                                            <a href="{{ route('barang.edit', $item->id) }}"><button class="btn bg-gradient-warning d-none d-md-block" title="Edit"><span
                                                     class="btn-inner--icon text-white"><i
-                                                        class="fa fa-pencil"></i></span></button>
+                                                        class="fa fa-pencil"></i></span></button></a>
                                         </div>
                                     </div>
                                     {{-- mobile --}}
@@ -79,8 +75,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            {{-- Modal Edit --}}
-                            @include('category.modalEdit')
                         @endforeach
                     </tbody>
                 </table>

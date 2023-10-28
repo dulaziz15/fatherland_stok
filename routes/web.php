@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ActionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StokStandController;
@@ -38,5 +40,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('account', AccountController::class)->names('account');
     Route::resource('penjualan', PenjualanController::class)->names('penjualan');
     Route::resource('stok', StokStandController::class)->names('stok');
+    Route::get('action', [ActionController::class, 'index'])->name('action');
+    Route::post('action/masuk', [ActionController::class, 'masuk'])->name('action_masuk');
+    Route::resource('user/forgotPassword', ForgotPasswordController::class)->names('forgotPassword');
 });
 

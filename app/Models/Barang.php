@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Barang extends Model
 {
     use HasFactory;
-
+    protected $table = 'barang';
+    protected $primaryKey = 'id';
     protected $fillable = ['id_category', 'name', 'jumlah', 'image', 'path_image'];
 
     public function category(){
@@ -17,5 +18,9 @@ class Barang extends Model
 
     public function stokBarang() {
         return $this->hasMany(StokBarangStand::class);
+    }
+
+    public function LogActivity() {
+        return $this->hasMany(LogActivity::class);
     }
 }

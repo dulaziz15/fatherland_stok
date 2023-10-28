@@ -78,7 +78,13 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $barang = $this->barangService->getById($id);
+        $category = $this->categoryService->findAll();
+        $return = [
+            'category' => $category,
+            'barang' => $barang
+        ];
+        return view('barang.edit', $return);
     }
 
     /**
@@ -90,7 +96,8 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->barangService->update($request, $id);
+        return redirect()->route('barang.index')->with('success', 'Barang updated successfully');
     }
 
     /**

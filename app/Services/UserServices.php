@@ -34,6 +34,12 @@ class UserServices implements UserServicesInterface {
         return $user;
     }
 
+    public function forgotPassword($id)
+    {
+        $user = User::with('stand')->where('id', $id)->first();
+        return $user;
+    }
+
     public function update($id, $request) {
         $user = $this->getById($id);
         $user->update([

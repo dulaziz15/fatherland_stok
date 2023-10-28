@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StokBarangStand extends Model
 {
+    protected $table = 'stok_barang_stand';
+    protected $primaryKey = 'id';
     use HasFactory;
 
     protected $fillable =['id_stand', 'id_barang', 'jumlah', 'note'];

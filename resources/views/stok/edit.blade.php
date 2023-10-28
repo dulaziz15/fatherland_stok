@@ -1,7 +1,7 @@
 <form id="formEditStok" style="display: none" method="POST">
     @csrf
     @method('PUT')
-    <h1>Edit Barang</h1>
+    <h3>Edit Barang</h3>
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
