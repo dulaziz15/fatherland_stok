@@ -13,17 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('report_penjualan', function (Blueprint $table) {
+        Schema::create('log_activity', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_stand')->nullable()->index()->unsigned(); // relasi ke table stand
+            $table->unsignedBigInteger('id_stand');
             $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade'); // Corrected 'references' method
-            $table->string('barang')->nullable(); // barang yang dijual
-            $table->integer('jumlah')->nullable(); // jumlah barang yang habis terjual
-            $table->timestamps();
+            $table->unsignedBigInteger('id_barang');
+            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->enum('action', ['masuk','keluar']);
+            $table->integer('jumlah');
+            $table->string('tujuan');
+            $table->string('note');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_penjualans');
+        Schema::dropIfExists('log_activity');
     }
 };

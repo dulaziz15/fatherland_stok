@@ -3,11 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-end align-items-center">
+            {{-- <div class="d-flex justify-content-end align-items-center">
                 <button class="btn bg-gradient-dark mb-0" onclick="addFormStok()"><i class="fas fa-plus"
                         aria-hidden="true"></i>&nbsp;&nbsp;Add Stok Barang</button>
 
-            </div>
+            </div> --}}
             @include('stok.create')
             @include('stok.edit')
         </div>
@@ -108,6 +108,7 @@
             if (form.is(':visible')) {
                 form.fadeOut();
             } else {
+                $('#formEditStok').fadeOut();
                 form.fadeIn();
             }
         }
@@ -115,18 +116,20 @@
         function closeFormEdit() {
             const form = $('#formEditStok');
             if (form.is(':visible')) {
-                form.hide();
+                form.fadeOut();
             } else {
-                form.show();
+                $('#formStok').hide();
+                form.fadeIn();
             }
         }
 
         function formEditStok(id) {
             const form = $('#formEditStok');
             if (form.is(':visible')) {
-                form.hide();
+                form.fadeOut();
             } else {
-                form.show();
+                $('#formStok').fadeOut();
+                form.fadeIn();
             }
             $.ajax({
                 url: '/stok/' + id + '/edit',

@@ -10,4 +10,5 @@ interface BarangServicesInterface {
     public function updateBarang($id, Request $request);
     public function getById($id);
     public function delete($id);
+    public function update(Request $request, $id);
 }

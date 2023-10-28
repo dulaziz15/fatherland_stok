@@ -10,4 +10,5 @@ interface UserServicesInterface {
     public function getById($id);
     public function update($id, $user);
     public function delete($id);
+    public function forgotPassword($id);
 }

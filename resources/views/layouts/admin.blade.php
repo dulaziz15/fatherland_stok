@@ -12,6 +12,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('error'))
+                <div class="alert alert-danger text-white">
+                    {{ session('error') }}
+                </div>
+            @endif
             @include('components.admin.card')
             @yield('content')
         </div>

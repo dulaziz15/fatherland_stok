@@ -14,7 +14,7 @@
                     <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-lg-6">
                                 <div class="form-outline">
                                     <label class="form-label" for="form8Example3">Username</label>
@@ -26,11 +26,6 @@
                                     <label class="form-label" for="form8Example3">Password</label>
                                     <input type="password" name="password" class="form-control" name="password" id="inputPassword"
                                         placeholder="Password" value="{{ $user->password }}" required disabled>
-                                    <div class="form-check form-switch mt-2">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                            onchange="showPassword()">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">Show Password</label>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -31,7 +31,6 @@ class BarangServices implements BarangServicesInterface {
         Barang::create([
             'id_category' => $barang->id_category,
             'name' => $barang->name,
-            'jumlah' => $barang->jumlah,
             'image' => $barang->image,
             'path_image' => $barang->path_image
         ]);
@@ -49,5 +48,28 @@ class BarangServices implements BarangServicesInterface {
     {
         $barang = $this->getById($id);
         $barang->delete();
+    }
+
+    public function update(Request $request, $id) {
+        $barang = $this->getById($id);
+        if($request->gambar == null) {
+            $barang->update([
+                'name' => $request->name,
+                'id_category' => $request->id_category,
+                'jumlah' => $request->jumlah,
+            ]);
+        }else{
+            $file = $request->file('gambar');
+           $name_image = $file->getClientOriginalName();
+           $tujuan_upload = 'images/barang';
+           $file->move($tujuan_upload,$file->getClientOriginalName());
+            $barang->update([
+                'name' => $request->name,
+                'id_category' => $request->id_category,
+                'jumlah' => $request->jumlah,
+                'path_image' => $tujuan_upload,
+                'image' => $name_image
+            ]);
+        }
     }
 }

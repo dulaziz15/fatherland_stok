@@ -19,12 +19,19 @@ class StokBarangServices implements StokBarangServicesInterface {
             'id_stand' => Auth::user()->stand->id,
             'id_barang' => $request->barang,
             'jumlah' => $request->jumlah,
+            'type' => $request->type,
+            'sisa' => $request->sisa,
             'note' => $request->note
         ]);
     }
 
     public function getStok(){
-        $stok = StokBarangStand::with('barang', 'stand')->paginate(5);
+        $stok = StokBarangStand::with('barang', 'stand')->where('id_stand', Auth::user()->stand->id)->paginate(5);
+        return $stok;
+    }
+
+    public function getAll(){
+        $stok = StokBarangStand::with('barang', 'stand')->where('id_stand', Auth::user()->stand->id)->get();
         return $stok;
     }
 
@@ -38,8 +45,11 @@ class StokBarangServices implements StokBarangServicesInterface {
     {
         $stok = $this->getById($id);
         $stok->update([
+            'id_stand' => Auth::user()->stand->id,
             'id_barang' => $request->barang,
-            'jumlah' => $request->jumlah,
+            'jumlah' => ($stok->jumlah + $request->jumlah),
+            'type' => $request->type,
+            'sisa' => $request->sisa,
             'note' => $request->note
         ]);
     }
@@ -48,5 +58,11 @@ class StokBarangServices implements StokBarangServicesInterface {
     {
         $stok = $this->getById($id);
         $stok->delete();
+    }
+
+    public function stokAvaliable($id)
+    {
+        $stok = StokBarangStand::where('id_barang', $id)->with('barang', 'stand')->first();
+        return $stok;
     }
 }

@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stands', function (Blueprint $table) {
+        Schema::create('stand', function (Blueprint $table) {
             $table->id();
             $table->string('pegawai')->nullable();
             $table->string('alamat')->nullable();
             $table->unsignedBigInteger('no_telp')->nullable();
             $table->unsignedBigInteger('id_user')->nullable()->index()->unsigned(); // relasi ke table user
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->string('path_image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

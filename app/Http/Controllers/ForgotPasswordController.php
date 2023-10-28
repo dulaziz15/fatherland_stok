@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BarangServices;
-use App\Services\StokBarangServices;
+use App\Services\UserServices;
 use Illuminate\Http\Request;
 
-class StokStandController extends Controller
+class ForgotPasswordController extends Controller
 {
     public function __construct(
-        private readonly StokBarangServices $stokBarangService,
-        private readonly BarangServices $barangServices,
-    ) {
+        private readonly UserServices $userServices,
+    )
+    {
+
     }
     /**
      * Display a listing of the resource.
@@ -20,13 +20,7 @@ class StokStandController extends Controller
      */
     public function index()
     {
-        $barang = $this->stokBarangService->getAll();
-        $stok = $this->stokBarangService->getStok();
-        $result = [
-            'barang' => $barang,
-            'stok' => $stok,
-        ];
-        return view('stok.index', $result);
+        //
     }
 
     /**
@@ -47,6 +41,7 @@ class StokStandController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**
@@ -68,8 +63,8 @@ class StokStandController extends Controller
      */
     public function edit($id)
     {
-        $stok = $this->stokBarangService->getById($id);
-        return json_decode($stok);
+        $user = $this->userServices->forgotPassword($id);
+        return $user;
     }
 
     /**
@@ -81,8 +76,7 @@ class StokStandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->stokBarangService->update($id, $request);
-        return redirect()->route('stok.index')->with('success', 'Stok updated successfully');
+        //
     }
 
     /**
@@ -93,7 +87,6 @@ class StokStandController extends Controller
      */
     public function destroy($id)
     {
-        $this->stokBarangService->delete($id);
-        return redirect()->route('stok.index')->with('success', 'Stok deleted successfully');
+        //
     }
 }
