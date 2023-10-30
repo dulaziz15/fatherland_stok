@@ -55,8 +55,7 @@ class BarangServices implements BarangServicesInterface {
         if($request->gambar == null) {
             $barang->update([
                 'name' => $request->name,
-                'id_category' => $request->id_category,
-                'jumlah' => $request->jumlah,
+                'id_category' => $request->id_category
             ]);
         }else{
             $file = $request->file('gambar');
@@ -66,7 +65,6 @@ class BarangServices implements BarangServicesInterface {
             $barang->update([
                 'name' => $request->name,
                 'id_category' => $request->id_category,
-                'jumlah' => $request->jumlah,
                 'path_image' => $tujuan_upload,
                 'image' => $name_image
             ]);

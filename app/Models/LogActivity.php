@@ -11,7 +11,7 @@ class LogActivity extends Model
     protected $table = 'log_activity';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id_stand', 'id_barang', 'action', 'jumlah', 'tujuan', 'note'
+        'id_stand', 'id_barang', 'action', 'jumlah', 'note'
     ];
 
     public function stand(){

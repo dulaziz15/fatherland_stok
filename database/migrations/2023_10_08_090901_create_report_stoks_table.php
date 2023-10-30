@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('report_stok', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_stand')->nullable()->index()->unsigned(); // relasi ke table stand
-            $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade');
+            $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_barang')->nullable()->index()->unsigned(); // relasi ke table barang
-            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jumlah')->nullable(); // jumlah akhir stok saat stand tutup
             $table->string('note')->nullable(); // catatan ketika laporan stok saat stand tutup
             $table->timestamps();

@@ -104,6 +104,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                @include('components.admin.empty', ['data' => $user])
             </div>
         </div>
     </div>

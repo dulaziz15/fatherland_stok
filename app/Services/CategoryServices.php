@@ -21,7 +21,7 @@ class CategoryServices implements CategoryServiceInterface {
 
    public function findPaginate()
    {
-        $category = Category::paginate(2);
+        $category = Category::paginate(5);
         return $category;
    }
 

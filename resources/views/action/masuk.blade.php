@@ -1,10 +1,11 @@
 <form action="{{ route('action_masuk') }}" id="formMasuk" style="display: none" method="POST">
     @csrf
     @method('POST')
+    <span class="badge badge-pill badge-lg bg-gradient-success">Barang Masuk</span>
     <div class="row">
         <div class="col-lg-6">
             <label for="exampleFormControlTextarea1">Barang</label>
-            <select class="form-select" id="single-select-field" name="barang" data-placeholder="Choose one thing">
+            <select class="form-select" id="single-select-field" name="barang" data-placeholder="Choose one thing" required>
                 <option></option>
                 @foreach ($barang as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -13,7 +14,7 @@
         </div>
         <div class="col-lg-6">
             <label for="exampleFormControlTextarea1">Type</label>
-            <select class="form-select" id="type" name="type" onchange="disableSisa()" data-placeholder="Choose one thing">
+            <select class="form-select type" name="type" onchange="disableSisa()" data-placeholder="Choose one thing">
                 <option value="paket">Paket</option>
                 <option value="satuan">Satuan</option>
             </select>
@@ -23,12 +24,12 @@
         <div class="col-lg-6">
             <div class="form-outline">
                 <label class="form-label" for="form8Example3">Jumlah</label>
-                <input type="number" id="form8Example3" class="form-control" name="jumlah" />
+                <input type="number" id="form8Example3" class="form-control" name="jumlah" required/>
             </div>
         </div>
         <div class="col-lg-6">
             <label for="exampleFormControlTextarea1">Kondisi</label>
-            <select class="form-select" id="sisa" name="sisa" data-placeholder="Choose one thing"
+            <select class="form-select sisa" name="sisa" data-placeholder="Choose one thing"
                 name="id_category" disabled>
                 <option></option>
                 <option id="value1" value="{{ \App\Enums\enumsSisa::banyak }}">{{ \App\Enums\enumsSisa::banyak }}</option>
@@ -43,7 +44,7 @@
         <div class="col-lg-12">
             <div class="form-outline">
                 <label class="form-label" for="form8Example3">Tujuan</label>
-                <input type="text" id="form8Example3" class="form-control" name="tujuan" />
+                <input type="text" id="form8Example3" class="form-control" name="tujuan" required/>
             </div>
         </div>
     </div>
@@ -60,12 +61,3 @@
         <button class="btn bg-gradient-success" type="submit">Simpan</button>
     </div>
 </form>
-<script>
-    function disableSisa() {
-    if($('#type').val() === 'satuan'){
-        $('#sisa').prop('disabled', false);
-    }else{
-        $('#sisa').prop('disabled', true);
-    }
-}
-</script>
