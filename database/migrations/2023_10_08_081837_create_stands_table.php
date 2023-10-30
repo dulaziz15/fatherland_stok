@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->unsignedBigInteger('no_telp')->nullable();
             $table->unsignedBigInteger('id_user')->nullable()->index()->unsigned(); // relasi ke table user
-            $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
             $table->string('image')->nullable();
             $table->string('path_image')->nullable();
             $table->timestamps();

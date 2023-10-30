@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('stok', StokStandController::class)->names('stok');
     Route::get('action', [ActionController::class, 'index'])->name('action');
     Route::post('action/masuk', [ActionController::class, 'masuk'])->name('action_masuk');
+    Route::post('action/keluar', [ActionController::class, 'keluar'])->name('action_keluar');
     Route::resource('user/forgotPassword', ForgotPasswordController::class)->names('forgotPassword');
 });
 

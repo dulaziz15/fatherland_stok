@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_category')->nullable()->index()->unsigned(); // relasi ke table category dengan one to
-            $table->foreign('id_category')->references('id')->on('category')->onDelete('cascade'); // foreign key
+            $table->foreign('id_category')->references('id')->on('category')->onDelete('cascade')->onUpdate('cascade'); // foreign key
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('path_image')->nullable();

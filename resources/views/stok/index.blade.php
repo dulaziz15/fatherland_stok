@@ -99,6 +99,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                @include('components.admin.paginate', ['paginator' => $stok])
+                @include('components.admin.empty', ['data' => $stok])
             </div>
         </div>
     </div>

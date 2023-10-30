@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('report_penjualan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_stand')->nullable()->index()->unsigned(); // relasi ke table stand
-            $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade'); // Corrected 'references' method
+            $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade')->onUpdate('cascade'); // Corrected 'references' method
             $table->string('barang')->nullable(); // barang yang dijual
             $table->integer('jumlah')->nullable(); // jumlah barang yang habis terjual
             $table->timestamps();

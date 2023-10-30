@@ -15,13 +15,15 @@ class LogActivityServices implements LogActivityServicesInterface {
             'id_barang' => $request->barang,
             'action' => 'masuk',
             'jumlah' => $request->jumlah,
-            'tujuan' => $request->tujuan,
             'note' => $request->note,
         ]);
     }
 
     public function getAll() {
-        $log = LogActivity::with('barang', 'stand')->where('id_stand', Auth::user()->stand->id)->paginate(10);
+        $log = LogActivity::with('barang', 'stand')
+                ->where('id_stand', Auth::user()->stand->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
         return $log;
     }
 }

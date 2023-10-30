@@ -10,7 +10,7 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             @if (Auth::user()->role == 'admin')
                 <li class="nav-item">
@@ -274,5 +274,8 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div class="sidenav-footer mx-3">
+        <a class="btn bg-gradient-primary mt-3 w-100" href="{{ route('logout') }}">Logout</a>
     </div>
 </aside>

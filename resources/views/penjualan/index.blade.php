@@ -77,6 +77,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                @include('components.admin.paginate', ['paginator' => $penjualan])
+                @include('components.admin.empty', ['data' => $penjualan])
             </div>
         </div>
     </div>

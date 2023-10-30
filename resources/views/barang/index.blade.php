@@ -61,8 +61,8 @@
                                         </button>
                                         <ul class="dropdown-menu px-2 py-3 bg-body border"
                                             aria-labelledby="dropdownMenuButton">
-                                            <li><button title="Edit"
-                                                    class="dropdown-item border-radius-md">Edit</button></li>
+                                            <li><a href="{{ route('barang.edit', $item->id) }}"><button title="Edit"
+                                                    class="dropdown-item border-radius-md">Edit</button></a></li>
                                             <li>
                                                 <form action="{{ route('barang.destroy', $item->id) }}" method="POST">
                                                     @csrf
@@ -80,27 +80,8 @@
                 </table>
                 {{-- // paginate --}}
                 {{-- in this line --}}
-                <div class="d-flex justify-content-end mt-3">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="javascript:;" tabindex="-1">
-                              <i class="fa fa-angle-left"></i>
-                              <span class="sr-only">Previous</span>
-                            </a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="javascript:;">1</a></li>
-                          <li class="page-item active"><a class="page-link" href="javascript:;">2</a></li>
-                          <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="javascript:;">
-                              <i class="fa fa-angle-right"></i>
-                              <span class="sr-only">Next</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                </div>
+                @include('components.admin.paginate', ['paginator' => $barang])
+                @include('components.admin.empty', ['data' => $barang])
             </div>
         </div>
     </div>

@@ -20,9 +20,11 @@ class ActionController extends Controller
     {
         $barang = $this->barangServices->getAll();
         $log = $this->logActivityServices->getAll();
+        $stok = $this->stokBarangServices->getAll();
         $result = [
             "barang" => $barang,
-            "log" => $log
+            "log" => $log,
+            "stok" => $stok,
         ];
         return view('action.index', $result);
     }

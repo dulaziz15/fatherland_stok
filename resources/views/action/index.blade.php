@@ -21,9 +21,57 @@
             @include('action.keluar')
         </div>
         <div class="card-body">
-            @foreach ($log as $item)
-                {{ $item->barang->name }}
-            @endforeach
+            <div class="table-responsive px-4">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Barang</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($log as $item)
+                            <tr>
+                                <td>
+                                    <div class="d-flex py-1">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->barang->name }}</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">
+                                        @if($item->action == 'masuk')
+                                            <span class="badge badge-pill badge-lg bg-gradient-success">{{ $item->action }}</span>
+                                        @else
+                                            <span class="badge badge-pill badge-lg bg-gradient-danger">{{ $item->action }}</span>
+                                        @endif
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $item->jumlah }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $item->note }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>
+                                </td>
+                                    {{-- mobile --}}
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{-- // paginate --}}
+                {{-- in this line --}}
+                @include('components.admin.paginate', ['paginator' => $log])
+                @include('components.admin.empty', ['data' => $log])
+            </div>
         </div>
     </div>
     <script>
@@ -33,11 +81,27 @@
                 form.fadeOut();
             } else {
                 form.fadeIn();
+                $('#formKeluar').fadeOut();
             }
         }
 
         function actionKeluar() {
+            const form = $('#formKeluar');
+            if (form.is(':visible')) {
+                form.fadeOut();
+            } else {
+                form.fadeIn();
+                $('#formMasuk').fadeOut();
+            }
+        }
 
+        function disableSisa() {
+            if ($('.type').val() === 'satuan') {
+                $('.sisa').prop('disabled', false);
+            } else {
+                $('.sisa').prop('disabled', true);
+            }
         }
     </script>
+
 @endsection

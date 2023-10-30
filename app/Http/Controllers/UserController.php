@@ -52,8 +52,8 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
         $data_user = $this->userServices->store($user);
-        $validatedData = $request->validate([
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg',
            ]);
 
            $file = $request->file('image');
@@ -68,9 +68,7 @@ class UserController extends Controller
             'path_image' => $tujuan_upload,
             'id_user' => $data_user->id,
         ]);
-
         $this->standServices->store($stand);
-
         return redirect()->route('user.index')->with('success', 'User and Stand created successfully');
     }
 

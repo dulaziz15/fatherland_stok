@@ -26,7 +26,7 @@ class PenjualanServices implements PenjualanServicesInterface
     {
         $penjualan = reportPenjualan::with('stand')
             ->where('id_stand', Auth::user()->stand->id)
-            ->get();
+            ->paginate(5);
         return $penjualan;
     }
 
