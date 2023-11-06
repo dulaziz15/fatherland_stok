@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_category')->nullable()->index()->unsigned(); // relasi ke table category dengan one to
             $table->foreign('id_category')->references('id')->on('category')->onDelete('cascade')->onUpdate('cascade'); // foreign key
             $table->string('name')->nullable();
+            $table->enum('type', ['paket', 'satuan'])->nullable();
             $table->string('image')->nullable();
             $table->string('path_image')->nullable();
             $table->timestamps();

@@ -12,6 +12,11 @@ class StandServices implements StandServicesInterface {
     {
     }
 
+    public function getAll(){
+        $stand = Stand::all();
+        return($stand);
+    }
+
     public function store($stand) {
         Stand::create([
             'pegawai' => $stand->pegawai,

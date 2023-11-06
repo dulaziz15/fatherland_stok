@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('id_stand')->references('id')->on('stand')->onDelete('cascade')->onUpdate('cascade'); // Corrected 'references' method
             $table->unsignedBigInteger('id_barang');
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('action', ['masuk','keluar']);
+            $table->enum('action', ['masuk','keluar','update']);
             $table->integer('jumlah')->nullable();
             $table->string('note')->nullable();
             $table->softDeletes();

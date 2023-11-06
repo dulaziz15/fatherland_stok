@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LogActivityServices implements LogActivityServicesInterface {
-    public function create(Request $request)
+    public function create($action, Request $request, $id_barang)
     {
         LogActivity::create([
             'id_stand' => Auth::user()->stand->id,
-            'id_barang' => $request->barang,
-            'action' => 'masuk',
+            'id_barang' => $id_barang,
+            'action' => $action,
             'jumlah' => $request->jumlah,
             'note' => $request->note,
         ]);

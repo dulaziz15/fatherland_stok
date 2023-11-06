@@ -15,6 +15,7 @@
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">category</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Create
                                 At</th>
@@ -31,6 +32,9 @@
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->category->category }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $item->type }}</p>
                                 </td>
                                 <td class="align-middle text-center">
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>

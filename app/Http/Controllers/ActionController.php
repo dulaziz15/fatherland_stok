@@ -18,13 +18,13 @@ class ActionController extends Controller
 
     public function index()
     {
-        $barang = $this->barangServices->getAll();
         $log = $this->logActivityServices->getAll();
         $stok = $this->stokBarangServices->getAll();
+        $barang = $this->barangServices->getAll();
         $result = [
-            "barang" => $barang,
             "log" => $log,
             "stok" => $stok,
+            "barang" => $barang,
         ];
         return view('action.index', $result);
     }
@@ -32,9 +32,9 @@ class ActionController extends Controller
     public function masuk(Request $request)
     {
         $barang = $this->stokBarangServices->getAll();
-        if($barang->isEmpty() == true){
+        if ($barang->isEmpty() == true) {
             $this->stokBarangServices->create($request);
-        }else{
+        } else {
             $found = false;
             foreach ($barang as $item) {
                 if ($item->id_barang == $request->barang) {
@@ -60,13 +60,15 @@ class ActionController extends Controller
                     // Handle the case when the ID is not unique
                 }
             }
-
-    }
-        $this->logActivityServices->create($request);
+        }
+        $action = 'masuk';
+        $this->logActivityServices->create($action, $request, $request->barang);
         return redirect()->route('action')->with('success', 'Barang apply successfully');
     }
 
-    public function keluar()
+    public function keluar(Request $request)
     {
+        $this->stokBarangServices->keluar($request->barang, $request);
+        return redirect()->route('action');
     }
 }
