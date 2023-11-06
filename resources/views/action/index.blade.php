@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-12 d-flex justify-content-end">
                     <div class="d-flex justify-content-end align-items-center mx-2">
                         <button class="btn bg-gradient-success mb-0" onclick="actionMasuk()"><i class="fas fa-plus"
@@ -44,10 +44,12 @@
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">
-                                        @if($item->action == 'masuk')
-                                            <span class="badge badge-pill badge-lg bg-gradient-success">{{ $item->action }}</span>
+                                        @if ($item->action == 'masuk')
+                                            <span
+                                                class="badge badge-pill badge-lg bg-gradient-success">{{ $item->action }}</span>
                                         @else
-                                            <span class="badge badge-pill badge-lg bg-gradient-danger">{{ $item->action }}</span>
+                                            <span
+                                                class="badge badge-pill badge-lg bg-gradient-danger">{{ $item->action }}</span>
                                         @endif
                                     </p>
                                 </td>
@@ -59,9 +61,6 @@
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>
-                                </td>
-                                    {{-- mobile --}}
-
                                 </td>
                             </tr>
                         @endforeach
@@ -76,11 +75,11 @@
     </div>
     <script>
         function actionMasuk() {
-            const form = $('#formMasuk');
-            if (form.is(':visible')) {
-                form.fadeOut();
+            const form1 = $('#formMasuk');
+            if (form1.is(':visible')) {
+                form1.fadeOut();
             } else {
-                form.fadeIn();
+                form1.fadeIn();
                 $('#formKeluar').fadeOut();
             }
         }
@@ -92,14 +91,6 @@
             } else {
                 form.fadeIn();
                 $('#formMasuk').fadeOut();
-            }
-        }
-
-        function disableSisa() {
-            if ($('.type').val() === 'satuan') {
-                $('.sisa').prop('disabled', false);
-            } else {
-                $('.sisa').prop('disabled', true);
             }
         }
     </script>

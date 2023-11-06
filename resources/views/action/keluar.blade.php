@@ -8,43 +8,16 @@
             <select class="form-select" id="single-select-field" name="barang" data-placeholder="Choose one thing">
                 <option></option>
                 @foreach ($stok as $item)
-                    <option value="{{ $item->id }}">{{ $item->barang->name }}</option>
+                    @if($item->barang->type == \App\Enums\enumType::Paket)
+                        <option value="{{ $item->id }}">{{ $item->barang->name }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
         <div class="col-lg-6">
-            <label for="exampleFormControlTextarea1">Type</label>
-            <select class="form-select" id="type" name="type" onchange="disableSisa()" data-placeholder="Choose one thing">
-                <option value="paket">Paket</option>
-                <option value="satuan">Satuan</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
             <div class="form-outline">
                 <label class="form-label" for="form8Example3">Jumlah</label>
                 <input type="number" id="form8Example3" class="form-control" name="jumlah" />
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <label for="exampleFormControlTextarea1">Kondisi</label>
-            <select class="form-select" id="sisa" name="sisa" data-placeholder="Choose one thing"
-                name="id_category" disabled>
-                <option></option>
-                <option id="value1" value="{{ \App\Enums\enumsSisa::banyak }}">{{ \App\Enums\enumsSisa::banyak }}</option>
-                <option id="value1" value="{{ \App\Enums\enumsSisa::habis }}">{{ \App\Enums\enumsSisa::habis }}</option>
-                <option id="value1" value="{{ \App\Enums\enumsSisa::sedikit }}">{{ \App\Enums\enumsSisa::sedikit }}</option>
-                <option id="value1" value="{{ \App\Enums\enumsSisa::setengah}}">{{ \App\Enums\enumsSisa::setengah }}</option>
-                <option id="value1" value="{{ \App\Enums\enumsSisa::seperempat}}">{{ \App\Enums\enumsSisa::seperempat }}</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-outline">
-                <label class="form-label" for="form8Example3">Tujuan</label>
-                <input type="text" id="form8Example3" class="form-control" name="tujuan" />
             </div>
         </div>
     </div>

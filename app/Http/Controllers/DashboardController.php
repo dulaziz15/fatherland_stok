@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\BarangServices;
+use App\Services\StandServices;
+use App\Services\StokBarangServices;
+use Illuminate\Http\Request;
+
+class DashboardController extends Controller
+{
+    public function __construct(
+        private readonly StokBarangServices $stokBarangServices,
+        private readonly BarangServices $barangServices,
+        private readonly StandServices $standServices,
+    )
+    {
+
+    }
+
+    public function index(){
+        $stand = $this->standServices->getAll();
+        $barang = $this->barangServices->getAll();
+        $stokBarang = $this->stokBarangServices->get();
+        $result = [
+            "jumlahStand" => $stand->count(),
+            "jumlahBarang" => $barang->count(),
+            "stand" => $stand,
+            "stokBarang" => $stokBarang,
+        ];
+        return view('pages.dashboard', $result);
+    }
+}

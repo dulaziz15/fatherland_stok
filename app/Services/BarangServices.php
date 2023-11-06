@@ -26,12 +26,18 @@ class BarangServices implements BarangServicesInterface {
         return $barang;
     }
 
+    public function filter($type){
+        $barang = Barang::with('category')->where('type', $type)->get();
+        return $barang;
+    }
+
 
     public function create($barang) {
         Barang::create([
             'id_category' => $barang->id_category,
             'name' => $barang->name,
             'image' => $barang->image,
+            'type' => $barang->type,
             'path_image' => $barang->path_image
         ]);
     }
@@ -55,7 +61,8 @@ class BarangServices implements BarangServicesInterface {
         if($request->gambar == null) {
             $barang->update([
                 'name' => $request->name,
-                'id_category' => $request->id_category
+                'id_category' => $request->id_category,
+                'type' => $request->type,
             ]);
         }else{
             $file = $request->file('gambar');
@@ -66,7 +73,8 @@ class BarangServices implements BarangServicesInterface {
                 'name' => $request->name,
                 'id_category' => $request->id_category,
                 'path_image' => $tujuan_upload,
-                'image' => $name_image
+                'image' => $name_image,
+                'type' => $request->type,
             ]);
         }
     }

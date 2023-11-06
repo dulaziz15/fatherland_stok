@@ -10,7 +10,7 @@ class Barang extends Model
     use HasFactory;
     protected $table = 'barang';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_category', 'name', 'jumlah', 'image', 'path_image'];
+    protected $fillable = ['id_category', 'name', 'type', 'image', 'path_image'];
 
     public function category(){
         return $this->belongsTo(Category::class, 'id_category');

@@ -20,10 +20,12 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-outline">
-                            <label class="form-label" for="form8Example3">jumlah</label>
-                            <input type="number" id="form8Example3" class="form-control" name="jumlah" value="{{ $barang->jumlah }}" />
-                        </div>
+                        <label class="form-label">Type</label>
+                        <select class="form-select" id="single-select-field" data-placeholder="Choose one thing" name="type">
+                            <option>{{ $item->type }}</option>
+                            <option value="{{ App\Enums\enumType::Satuan }}">{{ App\Enums\enumType::Satuan }}</option>
+                            <option value="{{ App\Enums\enumType::Paket }}">{{ App\Enums\enumType::Paket }}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row p-2">

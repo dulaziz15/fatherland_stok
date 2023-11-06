@@ -5,6 +5,7 @@ use App\Http\Controllers\ActionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenjualanController;
@@ -26,9 +27,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('handle_login');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/category', [CategoryController::class, 'index'])->name('category');
         Route::post('/category', [CategoryController::class, 'create'])->name('create_category');
         Route::get('/category/{id}', [CategoryController::class, 'edit'])->name('edit_category');

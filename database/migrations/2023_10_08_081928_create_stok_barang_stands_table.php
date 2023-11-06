@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_barang')->nullable()->index()->unsigned(); // relasi ke table barang
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jumlah')->nullable();
-            $table->enum('type', ['satuan', 'paket'])->default('satuan');
             $table->enum('sisa', ['banyak', 'setengah', 'seperempat', 'sedikit', 'habis'])->default('banyak')->nullable();
             $table->string('note')->nullable();
             $table->softDeletes();

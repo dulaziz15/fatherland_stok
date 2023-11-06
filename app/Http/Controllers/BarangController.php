@@ -53,6 +53,7 @@ class BarangController extends Controller
             'name' => $request->barang,
             'jumlah' => $request->jumlah,
             'image' => $name_image,
+            'type' => $request->type,
             'path_image' => $tujuan_upload,
         ]);
         $this->barangService->create($barang);
@@ -110,5 +111,10 @@ class BarangController extends Controller
     {
         $this->barangService->delete($id);
         return redirect()->route('barang.index')->with('success', 'Barang deleted successfully');
+    }
+
+    public function filter($type){
+        $barang = $this->barangService->filter($type);
+        return $barang;
     }
 }

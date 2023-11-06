@@ -8,9 +8,9 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Stand</p>
                       <h5 class="font-weight-bolder mb-0">
-                        $53,000
+                        {{ $jumlahStand }}
                         <span class="text-success text-sm font-weight-bolder">+55%</span>
                       </h5>
                     </div>
@@ -25,14 +25,23 @@
             </div>
           </div>
           <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            {{-- @foreach ($stokBarang as $item)
+            <div class="card">
+                <div class="card-body">
+                    @foreach ($item as $barang)
+                        <h1>{{ $barang->barang->name }}</h1>
+                    @endforeach
+                </div>
+            </div>
+            @endforeach --}}
             <div class="card">
               <div class="card-body p-3">
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Barang</p>
                       <h5 class="font-weight-bolder mb-0">
-                        2,300
+                        {{ $jumlahBarang }}
                         <span class="text-success text-sm font-weight-bolder">+3%</span>
                       </h5>
                     </div>
