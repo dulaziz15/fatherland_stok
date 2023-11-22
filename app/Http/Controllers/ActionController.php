@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\BarangServices;
 use App\Services\LogActivityServices;
+use App\Services\StandServices;
 use App\Services\StokBarangServices;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,14 @@ class ActionController extends Controller
     public function __construct(
         private readonly StokBarangServices $stokBarangServices,
         private readonly BarangServices $barangServices,
-        private readonly LogActivityServices $logActivityServices
+        private readonly LogActivityServices $logActivityServices,
+        private readonly StandServices $standServices
     ) {
     }
 
     public function index()
     {
-        $log = $this->logActivityServices->getAll();
+        $log = $this->logActivityServices->getToday();
         $stok = $this->stokBarangServices->getAll();
         $barang = $this->barangServices->getAll();
         $result = [
@@ -38,14 +40,13 @@ class ActionController extends Controller
             $found = false;
             foreach ($barang as $item) {
                 if ($item->id_barang == $request->barang) {
-                    $this->stokBarangServices->update($request->barang, $request);
+                    $this->stokBarangServices->updatePaket($request->barang, $request);
                     $found = true;
                     break;
                 }
             }
 
             if (!$found) {
-                // Logic to check for uniqueness before creating a new entry
                 $isUnique = true;
                 foreach ($barang as $item) {
                     if ($item->id_barang == $request->barang) {
@@ -70,5 +71,23 @@ class ActionController extends Controller
     {
         $this->stokBarangServices->keluar($request->barang, $request);
         return redirect()->route('action');
+    }
+
+    public function log(){
+        $log = $this->logActivityServices->getAll();
+        $result = [
+            "log" => $log
+        ];
+        return view('log.index', $result);
+    }
+
+    public function logAdmin(){
+        $log = $this->logActivityServices->getLog();
+        $stand = $this->standServices->getAll();
+        $result = [
+            "log" => $log,
+            "stand" => $stand
+        ];
+        return view('log.admin', $result);
     }
 }

@@ -31,6 +31,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-end">
+        <button class="btn bg-gradient-dark" onclick="tutupForm()" type="button">Tutup</button>
         <button class="btn bg-gradient-danger mx-2" type="reset">Reset</button>
         <button class="btn bg-gradient-success" type="submit">Simpan</button>
     </div>

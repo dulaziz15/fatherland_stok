@@ -26,6 +26,12 @@ class BarangServices implements BarangServicesInterface {
         return $barang;
     }
 
+    public function getSatuan()
+    {
+        $satuan = Barang::where('type', \App\Enums\enumType::Satuan)->get();
+        return $satuan;
+    }
+
     public function filter($type){
         $barang = Barang::with('category')->where('type', $type)->get();
         return $barang;

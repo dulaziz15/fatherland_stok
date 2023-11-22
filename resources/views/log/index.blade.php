@@ -1,34 +1,17 @@
 @extends('layouts.admin')
-@section('card_judul', 'Transaction')
+@section('card_judul', 'Log Activity')
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <div class="row mb-3">
-                <div class="col-md-12 d-flex justify-content-end">
-                    <div class="d-flex justify-content-end align-items-center mx-2">
-                        <button class="btn bg-gradient-success mb-0" onclick="actionMasuk()"><i class="fas fa-plus"
-                                aria-hidden="true"></i>&nbsp;&nbsp;Masuk</button>
-
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center">
-                        <button class="btn bg-gradient-danger mb-0" onclick="actionKeluar()"><i class="fas fa-minus"
-                                aria-hidden="true"></i>&nbsp;&nbsp;Keluar</button>
-
-                    </div>
-                </div>
-            </div>
-            @include('action.masuk')
-            @include('action.keluar')
-        </div>
         <div class="card-body">
             <div class="table-responsive px-4">
-                <span class="badge badge-pill badge-lg bg-gradient-success">Transaksi Hari Ini</span>
+                <span class="badge badge-pill badge-lg bg-gradient-success">Semua Transaksi</span>
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Barang</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">perubahan</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">KeteranganPP</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">perubahan
+                            </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal
                             </th>
@@ -83,32 +66,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function actionMasuk() {
-            const form1 = $('#formMasuk');
-            if (form1.is(':visible')) {
-                form1.fadeOut();
-            } else {
-                form1.fadeIn();
-                $('#formKeluar').fadeOut();
-            }
-        }
-
-        function actionKeluar() {
-            const form = $('#formKeluar');
-            if (form.is(':visible')) {
-                form.fadeOut();
-            } else {
-                form.fadeIn();
-                $('#formMasuk').fadeOut();
-            }
-        }
-
-        function tutupForm() {
-            const form = $('#formKeluar');
-            $('#formMasuk').fadeOut();
-            $('#formKeluar').fadeOut();
-        }
-    </script>
-
 @endsection

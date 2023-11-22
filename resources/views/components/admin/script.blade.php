@@ -183,110 +183,263 @@
             },
         },
     });
+</script>
+@if (request()->routeIs('dashboard'))
+    <script>
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
 
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
 
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+        function randomColor() {
+            // Menghasilkan nilai warna acak dalam format HEX (#xxxxxx)
+            return '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+        const piscok = {!! json_encode($piscok) !!};
+        // Membuat array kosong untuk menyimpan datasets
+        const datasets = [];
+        let maxLength = 0;
+        const penjualan = [];
+        for (const key in piscok) {
+            if (Object.hasOwnProperty.call(piscok, key)) {
+                const item = piscok[key];
+                // console.log(item);
 
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+                const jumlahArray = [];
 
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+                for (const barang in item) {
+                    if (item.hasOwnProperty(barang) && item[barang].hasOwnProperty('jumlah')) {
+                        jumlahArray.push(item[barang].jumlah);
+                        const createdDateString2 = item[barang].created_at;
+                        const parsedDate2 = new Date(createdDateString2);
+                        const day2 = parsedDate2.getDate();
+                        const month2 = parsedDate2.toLocaleString('default', {
+                            month: 'short'
+                        });
+                        penjualan.push(`${day2} ${month2}`);
+                    }
+                }
 
-    new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                    label: "Mobile apps",
+                const newDataset = {
+                    label: item[0]['stand']['pegawai'],
                     tension: 0.4,
                     borderWidth: 0,
                     pointRadius: 0,
-                    borderColor: "#cb0c9f",
+                    borderColor: randomColor(),
                     borderWidth: 3,
                     backgroundColor: gradientStroke1,
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: jumlahArray,
                     maxBarThickness: 6
+                };
 
+                datasets.push(newDataset);
+
+                maxLength = Math.max(maxLength, jumlahArray.length);
+            }
+        }
+
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: penjualan,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
                 },
-                {
-                    label: "Websites",
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#b2b9bf',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#b2b9bf',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script>
+    <script>
+        var ctx5 = document.getElementById("chart-line-2").getContext("2d");
+
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+        function randomColor() {
+            // Menghasilkan nilai warna acak dalam format HEX (#xxxxxx)
+            return '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+        const brownis = {!! json_encode($brownis) !!};
+        // Membuat array kosong untuk menyimpan datasets
+        const data = [];
+        let maksimal = 0;
+        const tanggal = [];
+        for (const index in brownis) {
+            if (Object.hasOwnProperty.call(brownis, index)) {
+                const buah = brownis[index];
+                console.log(buah);
+
+                const jumlahArray = [];
+
+                for (const barang in buah) {
+                    if (buah.hasOwnProperty(barang) && buah[barang].hasOwnProperty('jumlah')) {
+                        jumlahArray.push(buah[barang].jumlah);
+                        const createdDateString = buah[barang].created_at;
+                        const parsedDate = new Date(createdDateString);
+                        const day = parsedDate.getDate();
+                        const month = parsedDate.toLocaleString('default', {
+                            month: 'short'
+                        });
+                        tanggal.push(`${day} ${month}`);
+                    }
+                }
+
+                const newDataset = {
+                    label: buah[0]['stand']['pegawai'],
                     tension: 0.4,
                     borderWidth: 0,
                     pointRadius: 0,
-                    borderColor: "#3A416F",
+                    borderColor: randomColor(),
                     borderWidth: 3,
-                    backgroundColor: gradientStroke2,
+                    backgroundColor: gradientStroke1,
                     fill: true,
-                    data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+                    data: jumlahArray,
                     maxBarThickness: 6
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
+                };
+
+                data.push(newDataset);
+
+                maksimal = Math.max(maksimal, jumlahArray.length);
+            }
+        }
+
+        const labels2 = Array.from({
+            length: maxLength
+        }, (_, index) => `Penjualan ${index + 1}`);
+
+        new Chart(ctx5, {
+            type: "line",
+            data: {
+                labels: tanggal,
+                datasets: data
             },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        padding: 10,
-                        color: '#b2b9bf',
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
                         display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#b2b9bf',
-                        padding: 20,
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
                     }
                 },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#b2b9bf',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#b2b9bf',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
             },
-        },
-    });
-</script>
+        });
+    </script>
+@endif
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

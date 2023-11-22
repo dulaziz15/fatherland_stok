@@ -67,9 +67,14 @@
                                                             class="fa fa-pencil"></i></span></button></a>
                                         </div>
                                         <div class="col-lg-2">
-                                                <button class="btn bg-gradient-info d-none d-md-block" onclick="formForgotPassword({{ $item->id }})" data-bs-toggle="tooltip" title="Ubah Password"
-                                                    title="Edit"><span class="btn-inner--icon text-white" ><i
-                                                            class="fa fa-key"></i></span></button>
+                                            <form action="{{ route('resetUser', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                <button class="btn bg-gradient-info d-none d-md-block"
+                                                    onclick="return confirm()" data-bs-toggle="tooltip" title="Reset Password"
+                                                    type="submit"><span class="btn-inner--icon text-white"><i
+                                                            class="fas fa-key"></i></span></button>
+                                            </form>
                                         </div>
                                     </div>
                                     {{-- mobile --}}
@@ -85,8 +90,13 @@
                                                         class="dropdown-item border-radius-md">Edit</button></a>
                                             </li>
                                             <li>
-                                                <button title="Edit"
-                                                        class="dropdown-item border-radius-md" onclick="formForgotPassword({{ $item->id }})">Ubah Password</button>
+                                                <form action="{{ route('resetUser', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button onclick='return confirm()'
+                                                        class="dropdown-item border-radius-md"
+                                                        type="submit">Delete</button>
+                                                </form>
                                             </li>
                                             <li>
                                                 <form action="{{ route('user.destroy', $item->id) }}" method="POST">

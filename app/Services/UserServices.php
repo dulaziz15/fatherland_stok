@@ -37,7 +37,9 @@ class UserServices implements UserServicesInterface {
     public function forgotPassword($id)
     {
         $user = User::with('stand')->where('id', $id)->first();
-        return $user;
+        $user->update([
+            'password' => Hash::make("123")
+        ]);
     }
 
     public function update($id, $request) {
