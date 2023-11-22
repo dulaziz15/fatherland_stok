@@ -123,4 +123,9 @@ class UserController extends Controller
         $this->userServices->delete($id);
         return redirect()->route('user.index')->with('success', 'User and Stand deleted successfully');
     }
+
+    public function resetUser($id){
+        $this->userServices->forgotPassword($id);
+        return redirect()->route('user.index')->with('success', 'User reset successfully');
+    }
 }

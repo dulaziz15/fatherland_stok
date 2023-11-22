@@ -3,10 +3,6 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-end align-items-center">
-                <button class="btn bg-gradient-dark mb-0" onclick="addReport()"><i class="fas fa-plus"
-                        aria-hidden="true"></i>&nbsp;&nbsp;Add Report Penjualan</button>
-            </div>
         </div>
         <div class="table-responsive">
             <div class="card-body">
@@ -93,9 +89,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function closeFormPenjualan(){
-            $('#formReport').fadeOut();
-        }
-    </script>
 @endsection

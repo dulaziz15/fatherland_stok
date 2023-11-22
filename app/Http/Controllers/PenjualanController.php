@@ -89,4 +89,10 @@ class PenjualanController extends Controller
         $this->penjualanServices->delete($id);
         return redirect()->route('penjualan.index');
     }
+
+    public function admin()
+    {
+        $penjualan = $this->penjualanServices->getReport();
+        return view('penjualan.admin', compact('penjualan'));
+    }
 }

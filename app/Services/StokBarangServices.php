@@ -27,6 +27,15 @@ class StokBarangServices implements StokBarangServicesInterface
         ]);
     }
 
+    public function createSatuan(Request $request){
+        StokBarangStand::create([
+            'id_stand' => Auth::user()->stand->id,
+            'id_barang' => $request->barang,
+            'sisa' => $request->jumlah,
+            'note' => $request->note,
+        ]);
+    }
+
     public function getStok()
     {
         $stok = StokBarangStand::with('barang', 'stand')->where('id_stand', Auth::user()->stand->id)->paginate(5);
@@ -54,14 +63,19 @@ class StokBarangServices implements StokBarangServicesInterface
         return $stok;
     }
 
+    public function updatePaket($id, Request $request)
+    {
+        $stok = StokBarangStand::where('id', $id)->where('id_stand', Auth::user()->stand->id)->first();
+        $stok->update([
+            'jumlah' => ($stok->jumlah + $request->jumlah),
+        ]);
+    }
+
     public function update($id, Request $request)
     {
-        $stok = StokBarangStand::where('id_barang', $id)->where('id_stand', Auth::user()->stand->id)->first();
+        $stok = StokBarangStand::where('id', $id)->where('id_stand', Auth::user()->stand->id)->first();
         $stok->update([
-            'id_stand' => Auth::user()->stand->id,
-            'id_barang' => $request->barang,
-            'jumlah' => ($stok->jumlah + $request->jumlah),
-            'note' => $request->note
+            'sisa' => $request->jumlah,
         ]);
     }
 
@@ -90,5 +104,26 @@ class StokBarangServices implements StokBarangServicesInterface
     {
         $stok = StokBarangStand::where('id_barang', $id)->with('barang', 'stand')->first();
         return $stok;
+    }
+
+    public function getSatuan(){
+        $satuan = StokBarangStand::whereHas('barang', function ($query) {
+            $query->where('type', \App\Enums\enumType::Satuan)
+            ->with('category');
+        })
+        ->with('stand', 'barang')
+        ->get()
+        ->groupBy('id_stand');
+        return $satuan;
+    }
+
+    public function getPaket(){
+        $paket = StokBarangStand::whereHas('barang', function ($query) {
+            $query->where('type', \App\Enums\enumType::Paket);
+        })
+        ->with('stand', 'barang')
+        ->get()
+        ->groupBy('id_stand');
+        return $paket;
     }
 }

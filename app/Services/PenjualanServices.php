@@ -26,8 +26,32 @@ class PenjualanServices implements PenjualanServicesInterface
     {
         $penjualan = reportPenjualan::with('stand')
             ->where('id_stand', Auth::user()->stand->id)
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
         return $penjualan;
+    }
+
+    public function getReport()
+    {
+        $penjualan = reportPenjualan::with('stand')
+            ->paginate(5);
+        return $penjualan;
+    }
+
+    public function getPiscok(){
+        $piscok = reportPenjualan::with('stand')
+            ->where('barang', \App\Enums\enumsProduk::piscok)
+            ->get()
+            ->groupBy('id_stand');
+        return $piscok;
+    }
+
+    public function getBrownis(){
+        $brownis = reportPenjualan::with('stand')
+            ->where('barang',  \App\Enums\enumsProduk::brownis)
+            ->get()
+            ->groupBy('id_stand');
+        return $brownis;
     }
 
     public function getById($id)

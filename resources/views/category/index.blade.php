@@ -14,7 +14,7 @@
                             <div class="modal-body p-0">
                                 <div class="card card-plain">
                                     <div class="card-header pb-0 text-left">
-                                        <h3 class="font-weight-bolder text-info text-gradient">Add Category</h3>
+                                        <h3 class="font-weight-bolder text-dark text-gradient">Add Category</h3>
                                     </div>
                                     <div class="card-body">
                                         <form action="{{ route('create_category') }}" role="form text-left" method="POST">
@@ -26,7 +26,7 @@
                                                     aria-label="Email" aria-describedby="email-addon" name="category">
                                             </div>
                                             <div class="text-center">
-                                                <button class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0"
+                                                <button class="btn btn-round bg-gradient-dark btn-lg w-100 mt-4 mb-0"
                                                     type="submit">Create
                                                 </button>
                                             </div>

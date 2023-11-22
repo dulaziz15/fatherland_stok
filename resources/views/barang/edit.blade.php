@@ -22,7 +22,7 @@
                     <div class="col-lg-6">
                         <label class="form-label">Type</label>
                         <select class="form-select" id="single-select-field" data-placeholder="Choose one thing" name="type">
-                            <option>{{ $item->type }}</option>
+                            <option>{{ $barang->type }}</option>
                             <option value="{{ App\Enums\enumType::Satuan }}">{{ App\Enums\enumType::Satuan }}</option>
                             <option value="{{ App\Enums\enumType::Paket }}">{{ App\Enums\enumType::Paket }}</option>
                         </select>

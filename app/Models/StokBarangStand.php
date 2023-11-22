@@ -11,7 +11,7 @@ class StokBarangStand extends Model
     protected $primaryKey = 'id';
     use HasFactory;
 
-    protected $fillable =['id_stand', 'id_barang', 'jumlah', 'note'];
+    protected $fillable =['id_stand', 'id_barang', 'jumlah', 'note', 'sisa'];
 
     public function stand(){
         return $this->belongsTo(Stand::class, 'id_stand');

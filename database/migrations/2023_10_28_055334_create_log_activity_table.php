@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_barang');
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('action', ['masuk','keluar','update']);
-            $table->integer('jumlah')->nullable();
+            $table->string('jumlah')->nullable();
             $table->string('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
