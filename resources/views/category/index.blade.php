@@ -43,7 +43,6 @@
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Id</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
                             Category
                         </th>
@@ -57,11 +56,6 @@
                     @foreach ($category as $item)
                         <tr>
                             <td>
-                                <div class="d-flex py-1">
-                                    <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
-                                </div>
-                            </td>
-                            <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->category }}</p>
                             </td>
                             <td class="align-middle text-center">
@@ -70,12 +64,11 @@
                             <td class="align-middle text-center">
                                 <div class="row justify-content-end">
                                     <div class="col-lg-2">
-                                        <form action="{{ route('delete_category', $item->id) }}" method="POST">
+                                        <form action="{{ route('delete_category', $item->id) }}" id="deleteForm" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn bg-gradient-danger d-none d-md-block"
-                                                onclick="return confirm()" data-bs-toggle="tooltip" title="Delete"
-                                                type="submit"><span class="btn-inner--icon text-white"><i
+                                            <button class="btn bg-gradient-danger d-none d-md-block"  onclick="return confirmDelete('{{ $item->category }}')" data-bs-toggle="tooltip" title="Delete"
+                                                type="button"><span class="btn-inner--icon text-white"><i
                                                         class="fas fa-trash"></i></span></button>
                                         </form>
                                     </div>

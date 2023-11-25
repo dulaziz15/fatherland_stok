@@ -15,17 +15,10 @@
                         @csrf
                         @method('PUT')
                         <div class="row mb-2">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-outline">
                                     <label class="form-label" for="form8Example3">Username</label>
                                     <input type="text" id="form8Example3" class="form-control" name="username" value="{{ $user->username }}"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-outline">
-                                    <label class="form-label" for="form8Example3">Password</label>
-                                    <input type="password" name="password" class="form-control" name="password" id="inputPassword"
-                                        placeholder="Password" value="{{ $user->password }}" required disabled>
                                 </div>
                             </div>
                         </div>

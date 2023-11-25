@@ -11,6 +11,7 @@
         <div class="table-responsive">
             <div class="card-body">
                 @include('penjualan.create')
+                @include('penjualan.edit')
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
@@ -45,18 +46,8 @@
                                 <td class="align-middle text-center">
                                     <div class="row justify-content-end mx-3">
                                         <div class="col-lg-2">
-                                            <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn bg-gradient-danger d-none d-md-block"
-                                                    onclick="return confirm()" data-bs-toggle="tooltip" title="Delete"
-                                                    type="submit"><span class="btn-inner--icon text-white"><i
-                                                            class="fas fa-trash"></i></span></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-lg-2">
                                             <button class="btn bg-gradient-warning d-none d-md-block"
-                                                onclick="" title="Edit"><span
+                                                onclick="formEditReport({{ $item->id }})" title="Edit"><span
                                                     class="btn-inner--icon text-white"><i
                                                         class="fa fa-pencil"></i></span></button>
                                         </div>
@@ -69,16 +60,7 @@
                                         </button>
                                         <ul class="dropdown-menu px-2 py-3 bg-body border"
                                             aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm()"
-                                                        class="dropdown-item border-radius-md"
-                                                        type="submit">Delete</button>
-                                                </form>
-                                            </li>
-                                            <li><button onclick="" title="Edit"
+                                            <li><button onclick="formEditReport({{ $item->id }})" title="Edit"
                                                 class="dropdown-item border-radius-md">Edit</button></li>
                                         <li>
                                         </ul>
@@ -94,8 +76,46 @@
         </div>
     </div>
     <script>
+        function getData(id) {
+
+    }
         function closeFormPenjualan(){
             $('#formReport').fadeOut();
+            $('#formEditReport').fadeOut();
         }
+
+        function formEditReport(id){
+            $('#formReport').fadeOut();
+            $('#formEditReport').fadeIn();
+            $.ajax({
+            url: '/penjualan/' + id + '/edit',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('#barangReport').val(response.barang);
+                $('#jumlahReport').val(response.jumlah);
+                $('#submitUpdate').attr('onclick', 'formUpdate(' + response.id + ')');
+                $('#formUpdateReport').attr('action', 'penjualan/' + response.id + '');
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+        }
+
+        function formUpdate(id) {
+        let category = $('#jumlahReport').val();
+        $.ajax({
+            url: '/penjualan/' + id,
+            method: 'PUT',
+            dataType: 'json',
+            data: {
+                jumlah: jumlah
+            },
+            success: function(response) {
+                let responseData = response.category;
+            },
+        })
+    }
     </script>
 @endsection

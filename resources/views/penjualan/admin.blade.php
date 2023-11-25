@@ -41,16 +41,6 @@
                                 <td class="align-middle text-center">
                                     <div class="row justify-content-end mx-3">
                                         <div class="col-lg-2">
-                                            <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn bg-gradient-danger d-none d-md-block"
-                                                    onclick="return confirm()" data-bs-toggle="tooltip" title="Delete"
-                                                    type="submit"><span class="btn-inner--icon text-white"><i
-                                                            class="fas fa-trash"></i></span></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-lg-2">
                                             <button class="btn bg-gradient-warning d-none d-md-block"
                                                 onclick="" title="Edit"><span
                                                     class="btn-inner--icon text-white"><i
@@ -65,15 +55,6 @@
                                         </button>
                                         <ul class="dropdown-menu px-2 py-3 bg-body border"
                                             aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm()"
-                                                        class="dropdown-item border-radius-md"
-                                                        type="submit">Delete</button>
-                                                </form>
-                                            </li>
                                             <li><button onclick="" title="Edit"
                                                 class="dropdown-item border-radius-md">Edit</button></li>
                                         <li>

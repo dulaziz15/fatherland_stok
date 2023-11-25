@@ -116,6 +116,13 @@
                                                 @else
                                                     {{ $barang->sisa }}
                                                 @endif
+                                                @if ($barang->updated_at == null)
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $barang->created_at->format('d F H:i') }}</p>
+                                                @else
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $barang->updated_at->format('d F H:i') }}</p>
+                                                @endif
                                             </div>
                                         </li>
                                     @endforeach
@@ -125,10 +132,8 @@
                     </div>
                 @endforeach
             </div>
+        </div>
     @endif
-    </div>
-
-
     <div class="row mt-4">
         <div class="col-lg-6">
             <div class="card z-index-2">

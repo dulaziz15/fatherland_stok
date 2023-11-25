@@ -11,7 +11,8 @@
                     <div class="col-lg-4">
                         <div class="card mt-3">
                             <div class="card-body">
-                                <span class="badge badge-pill badge-lg bg-gradient-warning">Stand {{ $barangSatuan[0]->stand->pegawai }}</span>
+                                <span class="badge badge-pill badge-lg bg-gradient-warning">Stand
+                                    {{ $barangSatuan[0]->stand->pegawai }}</span>
                                 <div class="table-responsive">
                                     <table class="table align-items-center mb-0">
                                         <thead>
@@ -45,7 +46,6 @@
                                                         <p class="text-xs font-weight-bold mb-0">{{ $semuaBarang->sisa }}
                                                         </p>
                                                     </td>
-                                                    <td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -68,7 +68,8 @@
                     <div class="col-lg-4">
                         <div class="card mt-3">
                             <div class="card-body">
-                                <span class="badge badge-pill badge-lg bg-gradient-primary">Stand {{ $barangSatuan[0]->stand->pegawai }}</span>
+                                <span class="badge badge-pill badge-lg bg-gradient-primary">Stand
+                                    {{ $barangSatuan[0]->stand->pegawai }}</span>
                                 <div class="table-responsive">
                                     <table class="table align-items-center mb-0">
                                         <thead>
@@ -77,9 +78,10 @@
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     barang
                                                 </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                category
-                                            </th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    category
+                                                </th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     jumlah

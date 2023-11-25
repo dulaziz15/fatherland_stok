@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\Interfaces\PenjualanServicesInterface;
 use App\Models\reportPenjualan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,15 +39,29 @@ class PenjualanServices implements PenjualanServicesInterface
         return $penjualan;
     }
 
-    public function getPiscok(){
+    public function getAllReport()
+    {
+        $penjualan = reportPenjualan::with('stand')
+            ->get();
+        return $penjualan;
+    }
+
+    public function getPiscok()
+    {
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
         $piscok = reportPenjualan::with('stand')
             ->where('barang', \App\Enums\enumsProduk::piscok)
+            ->whereDate('created_at', '>=', $startOfMonth)
+            ->whereDate('created_at', '<=', $endOfMonth)
             ->get()
             ->groupBy('id_stand');
         return $piscok;
     }
 
-    public function getBrownis(){
+    public function getBrownis()
+    {
         $brownis = reportPenjualan::with('stand')
             ->where('barang',  \App\Enums\enumsProduk::brownis)
             ->get()
@@ -60,7 +75,16 @@ class PenjualanServices implements PenjualanServicesInterface
         return $penjualan;
     }
 
-    public function delete($id) {
+    public function update($request, $id)
+    {
+        $penjualan = reportPenjualan::where('id', $id)->first();
+        $penjualan->update([
+            'jumlah' => $request->jumlah,
+        ]);
+    }
+
+    public function delete($id)
+    {
         $penjualan = $this->getById($id);
         $penjualan->delete();
     }

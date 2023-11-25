@@ -65,7 +65,7 @@ class StokBarangServices implements StokBarangServicesInterface
 
     public function updatePaket($id, Request $request)
     {
-        $stok = StokBarangStand::where('id', $id)->where('id_stand', Auth::user()->stand->id)->first();
+        $stok = StokBarangStand::where('id_barang', $id)->where('id_stand', Auth::user()->stand->id)->first();
         $stok->update([
             'jumlah' => ($stok->jumlah + $request->jumlah),
         ]);

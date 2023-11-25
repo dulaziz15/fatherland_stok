@@ -31,8 +31,7 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Create
-                                At</th>
+                                Tanggal</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             </th>
                             <th class="text-secondary opacity-7"></th>
@@ -57,7 +56,13 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->note }}</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
+                                        @if ($item->updated_at == null)
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ $item->created_at->format('d F H:i') }}</p>
+                                        @else
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ $item->updated_at->format('d F H:i') }}</p>
+                                        @endif
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="row justify-content-end mx-3">
@@ -111,8 +116,7 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Create
-                                At</th>
+                                Tanggal</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             </th>
                             <th class="text-secondary opacity-7"></th>
@@ -137,16 +141,16 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->note }}</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
+                                        @if ($item->updated_at == null)
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ $item->created_at->format('d F H:i') }}</p>
+                                        @else
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ $item->updated_at->format('d F H:i') }}</p>
+                                        @endif
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="row justify-content-end mx-3">
-                                            {{-- <div class="col-lg-3">
-                                                <button class="btn bg-gradient-warning d-none d-md-block"
-                                                    onclick="formEditStok({{ $item->id }})" title="Edit"><span
-                                                        class="btn-inner--icon text-white"><i
-                                                            class="fa fa-pencil"></i></span></button>
-                                            </div> --}}
                                         </div>
                                         {{-- mobile --}}
                                         <div class="btn-group dropleft mt-3 d-md-none">
@@ -156,9 +160,6 @@
                                             </button>
                                             <ul class="dropdown-menu px-2 py-3 bg-body border"
                                                 aria-labelledby="dropdownMenuButton">
-                                                {{-- <li><button onclick="formEditStok({{ $item->id }})" title="Edit"
-                                                        class="dropdown-item border-radius-md">Edit</button></li>
-                                                <li> --}}
                                             </ul>
                                         </div>
                                     </td>
@@ -195,8 +196,8 @@
 
         function tutupFormBarang() {
             const form = $('#formEditStok');
-                form.fadeOut();
-                $('#formStok').fadeOut();
+            form.fadeOut();
+            $('#formStok').fadeOut();
         }
 
         function formEditStok(id) {
@@ -212,7 +213,8 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    $('#kondisi').prepend(`<option value="` + response.sisa + `" selected>` + response.sisa + `</option>`);
+                    $('#kondisi').prepend(`<option value="` + response.sisa + `" selected>` + response.sisa +
+                        `</option>`);
                     $('#barang').val(response.barang.name);
                     $('#id_barang').val(response.barang.id);
                     $('#note').val(response.note);
