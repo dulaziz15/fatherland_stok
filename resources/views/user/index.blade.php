@@ -51,19 +51,19 @@
                                 <td class="align-middle text-center">
                                     <div class="row justify-content-end">
                                         <div class="col-lg-2">
-                                            <form action="{{ route('user.destroy', $item->id) }}" method="POST">
+                                            <form action="{{ route('user.destroy', $item->id) }}" id="deleteForm" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn bg-gradient-danger d-none d-md-block"
-                                                    onclick="return confirm()" data-bs-toggle="tooltip" title="Delete"
-                                                    type="submit"><span class="btn-inner--icon text-white"><i
+                                                <button class="btn bg-gradient-danger d-none d-md-block button-delete" onclick="return confirmDelete('{{ $item->username }}')" data-bs-toggle="tooltip" title="Delete"
+                                                    type="button"><span class="btn-inner--icon text-white"><i
                                                             class="fas fa-trash"></i></span></button>
                                             </form>
                                         </div>
                                         <div class="col-lg-2">
                                             <a href="{{ route('user.edit', $item->id) }}">
-                                                <button class="btn bg-gradient-warning d-none d-md-block" data-bs-toggle="tooltip" title="Edit"
-                                                    title="Edit"><span class="btn-inner--icon text-white"><i
+                                                <button class="btn bg-gradient-warning d-none d-md-block"
+                                                    data-bs-toggle="tooltip" title="Edit" title="Edit"><span
+                                                        class="btn-inner--icon text-white"><i
                                                             class="fa fa-pencil"></i></span></button></a>
                                         </div>
                                         <div class="col-lg-2">
@@ -71,8 +71,9 @@
                                                 @csrf
                                                 @method('POST')
                                                 <button class="btn bg-gradient-info d-none d-md-block"
-                                                    onclick="return confirm()" data-bs-toggle="tooltip" title="Reset Password"
-                                                    type="submit"><span class="btn-inner--icon text-white"><i
+                                                    onclick="return confirm()" data-bs-toggle="tooltip"
+                                                    title="Reset Password" type="submit"><span
+                                                        class="btn-inner--icon text-white"><i
                                                             class="fas fa-key"></i></span></button>
                                             </form>
                                         </div>
@@ -93,18 +94,17 @@
                                                 <form action="{{ route('resetUser', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('POST')
-                                                    <button onclick='return confirm()'
-                                                        class="dropdown-item border-radius-md"
+                                                    <button class="dropdown-item border-radius-md button-delete"
                                                         type="submit">Delete</button>
                                                 </form>
                                             </li>
                                             <li>
-                                                <form action="{{ route('user.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('user.destroy', $item->id) }}" id="deleteForm" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button onclick="return confirm()"
+                                                    <button onclick="return confirmDelete('{{ $item->username }}')"
                                                         class="dropdown-item border-radius-md"
-                                                        type="submit">Delete</button>
+                                                        type="button">Delete</button>
                                                 </form>
                                             </li>
                                         </ul>
@@ -119,7 +119,7 @@
         </div>
     </div>
     <script>
-        function formForgotPassword(id){
+        function formForgotPassword(id) {
             const form = $('#formForgotPassword');
             if (form.is(':visible')) {
                 form.fadeOut();
@@ -127,7 +127,7 @@
                 form.fadeIn();
             }
             $.ajax({
-                url: '{{ route('forgotPassword.edit',' + id +  ') }}',
+                url: '{{ route('forgotPassword.edit', ' + id +  ') }}',
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -143,6 +143,6 @@
                     console.log(error);
                 }
             });
-            };
+        };
     </script>
 @endsection

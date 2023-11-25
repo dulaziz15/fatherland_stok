@@ -86,8 +86,27 @@
 <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- preview image --}}
 <script>
+    function confirmDelete(data) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: `Anda ingin menghapus data ${data}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus data!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').submit();
+            } else {
+                Swal.fire('Cancelled', 'Your action has been cancelled', 'info');
+            }
+        });
+    }
+
     function preview() {
         frame.src = URL.createObjectURL(event.target.files[0]);
     }

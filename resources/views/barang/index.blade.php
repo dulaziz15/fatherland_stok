@@ -42,11 +42,11 @@
                                 <td class="align-middle text-center">
                                     <div class="row justify-content-end">
                                         <div class="col-lg-2">
-                                            <form action="{{ route('barang.destroy', $item->id) }}" method="POST">
+                                            <form action="{{ route('barang.destroy', $item->id) }}" id="deleteForm" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn bg-gradient-danger d-none d-md-block" onclick="return confirm()"
-                                                    data-bs-toggle="tooltip" title="Delete" type="submit"><span
+                                                <button class="btn bg-gradient-danger d-none d-md-block" onclick="return confirmDelete('{{ $item->name }}')"
+                                                    data-bs-toggle="tooltip" title="Delete" type="button"><span
                                                         class="btn-inner--icon text-white"><i
                                                             class="fas fa-trash"></i></span></button>
                                             </form>
@@ -68,11 +68,11 @@
                                             <li><a href="{{ route('barang.edit', $item->id) }}"><button title="Edit"
                                                     class="dropdown-item border-radius-md">Edit</button></a></li>
                                             <li>
-                                                <form action="{{ route('barang.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('barang.destroy', $item->id) }}" id="deleteForm" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button onclick="return confirm()" class="dropdown-item border-radius-md"
-                                                        type="submit">Delete</button>
+                                                    <button onclick="return confirmDelete('{{ $item->name }}')" class="dropdown-item border-radius-md"
+                                                        type="button">Delete</button>
                                                 </form>
                                             </li>
                                         </ul>
