@@ -26,6 +26,8 @@ class DashboardController extends Controller
         $stokBarang = $this->stokBarangServices->get();
         $piscok = $this->penjualanServices->getPiscok();
         $brownis = $this->penjualanServices->getBrownis();
+        $jumlahPiscok = $this->penjualanServices->jumlahPiscok();
+        $jumlahBrownis = $this->penjualanServices->jumlahBrownis();
         $result = [
             "jumlahStand" => $stand->count(),
             "jumlahBarang" => $barang->count(),
@@ -33,8 +35,9 @@ class DashboardController extends Controller
             "stokBarang" => $stokBarang,
             "piscok" => $piscok,
             "brownis" => $brownis,
+            "jumlahBrownis" => $jumlahBrownis,
+            "jumlahPiscok" => $jumlahPiscok,
         ];
-        // dd($brownis);
         return view('pages.dashboard', $result);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\PenjualanServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenjualanController extends Controller
 {
@@ -41,14 +42,13 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $reportPenjualan = $this->penjualanServices->getAllReport();
-
         if ($reportPenjualan->isEmpty()) {
             $this->penjualanServices->store($request);
             return redirect()->route('penjualan.index')->with('success', 'Report Penjualan created successfully');
         }
 
         $todayReports = $reportPenjualan->filter(function ($item) use ($request) {
-            return $item->created_at->toDateString() === now()->toDateString() && $item->barang == $request->barang;
+            return $item->created_at->toDateString() === now()->toDateString() && $item->barang == $request->barang && Auth::user()->stand->id == $item->id_stand;
         });
 
         if ($todayReports->isNotEmpty()) {

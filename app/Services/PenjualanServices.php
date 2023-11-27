@@ -69,6 +69,36 @@ class PenjualanServices implements PenjualanServicesInterface
         return $brownis;
     }
 
+    public function jumlahPiscok()
+    {
+        $piscok = reportPenjualan::with('stand')
+            ->where('barang', \App\Enums\enumsProduk::piscok)
+            ->get();
+
+        $jumlah = 0;
+
+        foreach ($piscok as $semuaPiscok) {
+            $jumlah += $semuaPiscok->jumlah;
+        }
+
+        return $jumlah;
+    }
+
+    public function jumlahBrownis()
+    {
+        $brownis = reportPenjualan::with('stand')
+            ->where('barang', \App\Enums\enumsProduk::brownis)
+            ->get();
+
+        $jumlah = 0;
+
+        foreach ($brownis as $semuaBrownis) {
+            $jumlah += $semuaBrownis->jumlah;
+        }
+
+        return $jumlah;
+    }
+
     public function getById($id)
     {
         $penjualan = reportPenjualan::where('id', $id)->first();
