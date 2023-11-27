@@ -5,7 +5,6 @@
 
 <body class="">
   @yield('content')
-  @include('components.login.footerLogin')
   @include('components.login.script')
 </body>
 

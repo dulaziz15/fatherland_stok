@@ -12,7 +12,6 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Stand</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{ $jumlahStand }}
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
                                 </h5>
                             </div>
                         </div>
@@ -34,7 +33,6 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Barang</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{ $jumlahBarang }}
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
                                 </h5>
                             </div>
                         </div>
@@ -56,7 +54,6 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     +3,462
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
                                 </h5>
                             </div>
                         </div>
@@ -78,7 +75,6 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     $103,430
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span>
                                 </h5>
                             </div>
                         </div>
@@ -139,9 +135,6 @@
             <div class="card z-index-2">
                 <div class="card-header pb-0">
                     <h6>Penjualan Piscok</h6>
-                    <p class="text-sm">
-                        <i class="fa fa-arrow-up text-success"></i>
-                    </p>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
@@ -154,9 +147,6 @@
             <div class="card z-index-2">
                 <div class="card-header pb-0">
                     <h6>Penjualan Brownis</h6>
-                    <p class="text-sm">
-                        <i class="fa fa-arrow-up text-success"></i>
-                    </p>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
