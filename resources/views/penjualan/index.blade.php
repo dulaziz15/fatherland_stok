@@ -46,6 +46,15 @@
                                 <td class="align-middle text-center">
                                     <div class="row justify-content-end mx-3">
                                         <div class="col-lg-2">
+                                            <form action="{{ route('penjualan.destroy', $item->id) }}" id="deleteForm" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn bg-gradient-danger d-none d-md-block button-delete" onclick="return confirmDelete('penjualan ini')" data-bs-toggle="tooltip" title="Delete"
+                                                    type="button"><span class="btn-inner--icon text-white"><i
+                                                            class="fas fa-trash"></i></span></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-lg-2">
                                             <button class="btn bg-gradient-warning d-none d-md-block"
                                                 onclick="formEditReport({{ $item->id }})" title="Edit"><span
                                                     class="btn-inner--icon text-white"><i
@@ -63,6 +72,15 @@
                                             <li><button onclick="formEditReport({{ $item->id }})" title="Edit"
                                                 class="dropdown-item border-radius-md">Edit</button></li>
                                         <li>
+                                            <li>
+                                                <form action="{{ route('penjualan.destroy', $item->id) }}" id="deleteForm" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button onclick="return confirmDelete('penjualan ini')"
+                                                        class="dropdown-item border-radius-md"
+                                                        type="button">Delete</button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
                                 </td>
