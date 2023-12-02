@@ -41,7 +41,7 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Gambar (png/jpg)</label>
-                            <input class="form-control" type="file" name="gambar" id="formFile" onchange="preview()">
+                            <input class="form-control" type="file" name="gambar" id="formFile" onchange="preview()" required>
                         </div>
                     </div>
                 </div>

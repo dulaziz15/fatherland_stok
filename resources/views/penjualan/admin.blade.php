@@ -4,10 +4,27 @@
     <div class="card">
         <div class="card-header">
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-4">
             <div class="card-body">
                 @include('penjualan.create')
-                <table class="table align-items-center mb-0">
+                <div class="row">
+                <div class="col-md-4">
+                    <label for="dateInput" class="form-label">Search by Date:</label>
+                    <input type="month" class="form-control" id="dateInput" placeholder="YYYY-MM-DD">
+                </div>
+                <div class="col-md-4">
+                    <label for="dateInput" class="form-label">Filte Stand</label>
+                    <select class="form-select" id="filterStand" name="jumlah"
+                            data-placeholder="Choose one thing" required>
+                            <option value="all">-- Pilih Nama Pegawai--</option>
+                            @foreach ($stand as $pegawai)
+                                <option value="{{ $pegawai->pegawai }}">{{ $pegawai->pegawai }}
+                                </option>
+                            @endforeach
+                        </select>
+                </div>
+            </div>
+                <table class="table align-items-center mb-0" id="penjualan">
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Pegawai
@@ -16,9 +33,10 @@
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal
                             </th>
-                            <th class="text-secondary opacity-7"></th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Pendapatan
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,37 +53,20 @@
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $item->jumlah }}</p>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F, Y') }}</p>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d F Y') }}</p>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <div class="row justify-content-end mx-3">
-                                        <div class="col-lg-2">
-                                            <button class="btn bg-gradient-warning d-none d-md-block"
-                                                onclick="" title="Edit"><span
-                                                    class="btn-inner--icon text-white"><i
-                                                        class="fa fa-pencil"></i></span></button>
-                                        </div>
-                                    </div>
-                                    {{-- mobile --}}
-                                    <div class="btn-group dropleft mt-3 d-md-none">
-                                        <button type="button" class="btn bg-gradient-dark dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-
-                                        </button>
-                                        <ul class="dropdown-menu px-2 py-3 bg-body border"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li><button onclick="" title="Edit"
-                                                class="dropdown-item border-radius-md">Edit</button></li>
-                                        <li>
-                                        </ul>
-                                    </div>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">@rupiah($item->jumlah * 2500)</p>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @include('components.admin.paginate', ['paginator' => $penjualan])
+                <div class="col-md-6 justify-content-end" id="jumlah">
+
+                </div>
+                {{-- @include('components.admin.paginate', ['paginator' => $penjualan]) --}}
                 @include('components.admin.empty', ['data' => $penjualan])
             </div>
         </div>

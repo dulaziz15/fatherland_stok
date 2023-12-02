@@ -37,13 +37,11 @@ class CategoryServices implements CategoryServiceInterface {
    }
 
    public function update($id, Request $request) {
-    $category = Category::find($id);
-    if (!$category) {
-        return response()->json(['message' => 'Category not found'], 404);
-    }
-    $category->category = $request->input('category');
-    $category->save();
-    }
+    $category = Category::where('id', $id)->first();
+    $category->update([
+        'category' => $request->category,
+    ]);
+}
 
     public function delete($id) {
         $category = Category::find($id);

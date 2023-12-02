@@ -28,8 +28,6 @@
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kondisi
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note
-                            </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Tanggal</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -51,9 +49,6 @@
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->sisa }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->note }}</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         @if ($item->updated_at == null)
@@ -113,8 +108,6 @@
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note
-                            </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Tanggal</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -136,9 +129,6 @@
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->jumlah }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->note }}</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         @if ($item->updated_at == null)
@@ -174,6 +164,7 @@
         </div>
     </div>
     <script>
+        // membuka form tambah stok
         function addFormStok() {
             const form = $('#formStok');
             if (form.is(':visible')) {
@@ -184,6 +175,7 @@
             }
         }
 
+        // menutup form edit data stok
         function closeFormEdit() {
             const form = $('#formEditStok');
             if (form.is(':visible')) {
@@ -194,12 +186,14 @@
             }
         }
 
+        // menutup form edit stok
         function tutupFormBarang() {
             const form = $('#formEditStok');
             form.fadeOut();
             $('#formStok').fadeOut();
         }
 
+        // membuka form edit stok
         function formEditStok(id) {
             const form = $('#formEditStok');
             if (form.is(':visible')) {
@@ -227,6 +221,7 @@
             })
         }
 
+        // get data category untk form edit stok
         function formUpdate(id) {
             $.ajax({
                 url: '/category/' + id,

@@ -7,12 +7,13 @@
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
             target="_blank">
             <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Fatherland Stok</span>
+            <span class="ms-1 font-weight-bold">Fatherland Application</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            {{-- menu untuk role admin --}}
             @if (Auth::user()->role == 'admin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">
@@ -234,6 +235,7 @@
                         <span class="nav-link-text ms-1">Log Activity</span>
                     </a>
                 </li>
+            {{-- menu untuk role user --}}
             @elseif(Auth::user()->role == 'user')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">
