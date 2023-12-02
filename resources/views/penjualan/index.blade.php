@@ -94,14 +94,13 @@
         </div>
     </div>
     <script>
-        function getData(id) {
-
-    }
+        // menutup form tambah report penjualan
         function closeFormPenjualan(){
             $('#formReport').fadeOut();
             $('#formEditReport').fadeOut();
         }
 
+        // membuka form edit report penjualan
         function formEditReport(id){
             $('#formReport').fadeOut();
             $('#formEditReport').fadeIn();
@@ -121,6 +120,7 @@
         });
         }
 
+        // untuk menambahkan action pada form update report penjualan
         function formUpdate(id) {
         let category = $('#jumlahReport').val();
         $.ajax({

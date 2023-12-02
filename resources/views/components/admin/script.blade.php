@@ -5,7 +5,7 @@
     <div class="card shadow-lg ">
         <div class="card-header pb-0 pt-3 ">
             <div class="float-start">
-                <h5 class="mt-3 mb-0">Fatherland Stok</h5>
+                <h5 class="mt-3 mb-0">Fatherland Application</h5>
                 <p>kostumisasi tampilan</p>
             </div>
             <div class="float-end mt-4">
@@ -67,8 +67,72 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{-- preview image --}}
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
+
+{{-- Function untuk filter tanggal dan stand pada menu report penualan --}}
 <script>
+    $(document).ready(function() {
+    var table = $('#penjualan').DataTable({
+        "paging": false, // Disable pagination
+        "info": false,
+    });
+
+    function convertDateFormat(inputDate) {
+        const [year, month] = inputDate.split('-');
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ];
+        const formattedDate = `${months[parseInt(month) - 1]} ${year}`;
+        return formattedDate;
+    }
+
+    function formatRupiah(amount) {
+        var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR'
+        });
+        return formatter.format(amount);
+    }
+
+    $('#dateInput').on('change', function() {
+        var formattedDate = convertDateFormat(this.value);
+        table.column(3).search(formattedDate).draw();
+        calculateTotal();
+    });
+
+    $('#filterStand').on('change', function() {
+        if(this.value == 'all') {
+            table.column(0).search('').draw();
+        }else{
+        table.column(0).search(this.value).draw();
+        }
+        calculateTotal();
+    });
+    calculateTotal();
+    function calculateTotal() {
+        var pattern = /Rp\. (\d{1,3}(?:\.\d{3})*(?:,\d+)?)/g;
+        var rpValues = table.column(4, { search: 'applied' }).data().toArray();
+        var extractedRupiahValues = rpValues.flatMap(function(htmlString) {
+            var matches = htmlString.match(pattern);
+            return matches || [];
+        });
+
+        var sum = extractedRupiahValues.reduce(function(total, value) {
+            var numericValue = parseFloat(value.replace('Rp. ', '').replace(/\./g, '').replace(',', '.'));
+            total += isNaN(numericValue) ? 0 : numericValue;
+            return total;
+        }, 0);
+
+        var formattedSum = formatRupiah(sum);
+        $('#jumlah').html('<h6>' + formattedSum + '</h6>');
+    }
+});
+</script>
+
+<script>
+    // Sweet Alert untuk confirmDelete semua fitur
     function confirmDelete(data) {
         Swal.fire({
             title: 'Apakah Anda Yakin?',
@@ -87,15 +151,18 @@
         });
     }
 
+    // Preview Gambar
     function preview() {
         frame.src = URL.createObjectURL(event.target.files[0]);
     }
 
+    // Clear Gambar
     function clearImage() {
         document.getElementById('formFile').value = null;
         frame.src = "";
     }
-    // show form add Report
+
+    // Menampilkan form add Report
     function addReport() {
         const form = $('#formReport');
         if (form.is(':visible')) {
@@ -116,75 +183,9 @@
         }
     }
 </script>
-<script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: "Sales",
-                tension: 0.4,
-                borderWidth: 0,
-                borderRadius: 4,
-                borderSkipped: false,
-                backgroundColor: "#fff",
-                data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                maxBarThickness: 6
-            }, ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                    },
-                    ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: 500,
-                        beginAtZero: true,
-                        padding: 15,
-                        font: {
-                            size: 14,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                        color: "#fff"
-                    },
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false
-                    },
-                    ticks: {
-                        display: false
-                    },
-                },
-            },
-        },
-    });
-</script>
 @if (request()->routeIs('dashboard'))
     <script>
+        // chart line penjualan untuk produk piscok
         var ctx2 = document.getElementById("chart-line").getContext("2d");
 
         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -310,6 +311,7 @@
         });
     </script>
     <script>
+        // chart penjualan untuk produk brownis
         var ctx5 = document.getElementById("chart-line-2").getContext("2d");
 
         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);

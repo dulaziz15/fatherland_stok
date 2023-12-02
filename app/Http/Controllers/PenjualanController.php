@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\PenjualanServices;
+use App\Services\StandServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,7 @@ class PenjualanController extends Controller
 {
     public function __construct(
         private readonly PenjualanServices $penjualanServices,
+        private readonly StandServices $standServices,
     ) {
     }
     /**
@@ -110,6 +112,13 @@ class PenjualanController extends Controller
     public function admin()
     {
         $penjualan = $this->penjualanServices->getReport();
-        return view('penjualan.admin', compact('penjualan'));
+        $income = $this->penjualanServices->getIncome();
+        $stand  = $this->standServices->getAll();
+        $result = [
+            "penjualan" => $penjualan,
+            "income" => $income,
+            "stand" => $stand,
+        ];
+        return view('penjualan.admin', $result);
     }
 }

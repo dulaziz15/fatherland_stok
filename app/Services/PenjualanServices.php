@@ -10,9 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PenjualanServices implements PenjualanServicesInterface
 {
-    public function __construct(reportPenjualan $reportPenjualan)
+    protected $reportPenjualan;
+    protected $currentMonth;
+    protected $endOfMonth;
+
+    public function __construct(reportPenjualan $reportPenjualan, $currentMonth = null, $endOfMonth = null)
     {
+        $this->reportPenjualan = $reportPenjualan;
+        $this->currentMonth = $currentMonth ?? Carbon::now()->startOfMonth();
+        $this->endOfMonth = $endOfMonth ?? Carbon::now()->endOfMonth();
     }
+
 
     public function store(Request $request)
     {
@@ -35,13 +43,28 @@ class PenjualanServices implements PenjualanServicesInterface
     public function getReport()
     {
         $penjualan = reportPenjualan::with('stand')
-            ->paginate(5);
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return $penjualan;
+    }
+
+    public function getIncome()
+    {
+        $penjualan = reportPenjualan::with('stand')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $income = 0;
+        foreach($penjualan as $barang){
+            $income += ($barang->jumlah * 2500);
+        }
+        return $income;
     }
 
     public function getAllReport()
     {
         $penjualan = reportPenjualan::with('stand')
+            ->orderBy('created_at', 'desc')
             ->get();
         return $penjualan;
     }

@@ -13,7 +13,7 @@
                             <label>Category</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="category" aria-label="Email"
-                                    aria-describedby="email-addon" name="category" id="category-update" value="">
+                                    aria-describedby="email-addon" name="category" id="category-update">
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-round bg-gradient-dark btn-lg w-100 mt-4 mb-0"
@@ -28,6 +28,7 @@
     </div>
 </div>
 <script>
+    // get data category untuk modal edit category
     function getData(id) {
         $.ajax({
             url: '/category/' + id,
@@ -47,6 +48,7 @@
         });
     }
 
+    // menambah action update category
     function formUpdate(id) {
         let category = $('#category-update').val();
         $.ajax({
